@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/auth.service';
+import { HttpClient } from '@angular/common/http';
 
 export interface HomePageTab {
   title: string; // The title of the tab in the tab bar
@@ -13,15 +16,19 @@ export interface HomePageTab {
 })
 export class HomePage implements OnInit {
 
-  tabs: HomePageTab[];
 
-  constructor() { 
-    this.tabs = [
-      { title: 'Bench', icon: 'add', path: 'bench' },
-    ]
+  constructor( private auth: AuthService,
+    private router: Router, public http: HttpClient) { 
+   
   }
 
   ngOnInit() {
+  }
+
+  logOut() {
+    console.log('logging out...');
+    this.auth.logOut();
+    this.router.navigateByUrl('/login');
   }
 
 }
