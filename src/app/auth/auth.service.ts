@@ -35,6 +35,7 @@ export class AuthService {
   }
 
    private saveAuth(auth: AuthResponse): Observable<void> {
+     console.log('saveAuth', auth);
     return from(this.storage.set('auth', auth));
   } 
 
@@ -55,11 +56,12 @@ export class AuthService {
     const authUrl = 'https://sedes666.herokuapp.com/users/login';
     return this.http.post<AuthResponse>(authUrl, authRequest).pipe(
        delayWhen(auth => {
+         console.log('Delay when')
         return this.saveAuth(auth);
       }), 
       map(auth => {
+        console.log(`User logged in`, auth);
         this.authSource.next(auth);
-        console.log(`User ${auth.user.username} logged in`);
         return auth.user;
       })
     );
