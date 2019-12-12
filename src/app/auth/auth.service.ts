@@ -8,6 +8,7 @@ import { Storage } from '@ionic/storage';
 import { AuthResponse } from '../models/auth-response';
 import { User } from '../models/user';
 import { AuthRequest } from '../models/auth-request';
+import { environment } from 'src/environments/environment';
 
 
 
@@ -53,7 +54,7 @@ export class AuthService {
 
   logIn(authRequest: AuthRequest): Observable<User> {
 
-    const authUrl = 'https://sedes666.herokuapp.com/users/login';
+    const authUrl = `${environment.apiUrl}/login`;
     return this.http.post<AuthResponse>(authUrl, authRequest).pipe(
        delayWhen(auth => {
          console.log('Delay when')

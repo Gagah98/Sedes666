@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { HttpClient } from '@angular/common/http';
 
+import { environment } from 'src/environments/environment';
+
 export interface HomePageTab {
   title: string; // The title of the tab in the tab bar
   icon: string; // The icon of the tab in the tab bar
@@ -21,8 +23,17 @@ export class HomePage implements OnInit {
     private router: Router, public http: HttpClient) { 
    
   }
+  
 
   ngOnInit() {
+    this.getBenches();
+  }
+
+  getBenches(){
+    const benchesUrl = `${environment.apiUrl}/benches`
+  this.http.get(benchesUrl).subscribe(benches => {
+    console.log(`Benches loaded`, benches);
+  });
   }
 
   logOut() {
@@ -31,4 +42,8 @@ export class HomePage implements OnInit {
     this.router.navigateByUrl('/login');
   }
 
+ 
+
+
 }
+
