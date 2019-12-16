@@ -12,10 +12,9 @@
   </ion-toolbar>
 </ion-header>
 
-<!-- *ngFor="let bench of benches" -->
 
 <ion-content>
-    
+    <ion-list *ngFor="let bench of benches">
     <ion-card>
         <ion-card-header>
             <ion-img [src]=""></ion-img>
@@ -27,6 +26,6 @@
             </ion-item>
         </ion-card-header>
       </ion-card>
-      
+    </ion-list>
 
 </ion-content>

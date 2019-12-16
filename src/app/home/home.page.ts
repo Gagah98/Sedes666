@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 import { Bench } from '../models/bench';
+import { BenchPage } from '../models/benchPage';
 
 
 export interface HomePageTab {
@@ -21,7 +22,7 @@ export interface HomePageTab {
 })
 export class HomePage implements OnInit {
 
-  bench:Bench
+  benches: Bench[];
 
   constructor( private auth: AuthService,
     private router: Router, public http: HttpClient) { 
@@ -37,11 +38,12 @@ export class HomePage implements OnInit {
 
   ionViewDidLoad(){
     const benchesUrl = `${environment.apiUrl}/benches`
-  this.http.get(benchesUrl).subscribe(benches => {
-    console.log(`Benches loaded`, benches);
-    this.bench = new Bench();
+  this.http.get<BenchPage>(benchesUrl).subscribe(result => {
+    console.log(`Benches loaded`, result);
+    this.benches = result.data;
   });
   }
+
 
   logOut() {
     console.log('logging out...');
