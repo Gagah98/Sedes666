@@ -54,7 +54,7 @@ export class AuthService {
 
   logIn(authRequest: AuthRequest): Observable<User> {
 
-    const authUrl = `${environment.apiUrl}/login`;
+    const authUrl = `${environment.apiUrl}/users/login`;
     return this.http.post<AuthResponse>(authUrl, authRequest).pipe(
        delayWhen(auth => {
          console.log('Delay when')

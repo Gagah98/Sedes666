@@ -5,6 +5,9 @@ import { HttpClient } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
 
+import { Bench } from '../models/bench';
+
+
 export interface HomePageTab {
   title: string; // The title of the tab in the tab bar
   icon: string; // The icon of the tab in the tab bar
@@ -18,21 +21,25 @@ export interface HomePageTab {
 })
 export class HomePage implements OnInit {
 
+  bench:Bench
 
   constructor( private auth: AuthService,
     private router: Router, public http: HttpClient) { 
    
   }
+
+  
   
 
   ngOnInit() {
-    this.getBenches();
+    this.ionViewDidLoad();
   }
 
-  getBenches(){
+  ionViewDidLoad(){
     const benchesUrl = `${environment.apiUrl}/benches`
   this.http.get(benchesUrl).subscribe(benches => {
     console.log(`Benches loaded`, benches);
+    this.bench = new Bench();
   });
   }
 

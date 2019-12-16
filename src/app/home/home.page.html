@@ -15,18 +15,18 @@
 <!-- *ngFor="let bench of benches" -->
 
 <ion-content>
-    <ion-list>
+    
     <ion-card>
         <ion-card-header>
             <ion-img [src]=""></ion-img>
-          <ion-card-title>Card Title</ion-card-title>
+          <ion-card-title>{{bench.description}}</ion-card-title>
           <ion-item>
               <ion-icon name="pin" slot="start"></ion-icon>
-              <ion-label>Yverdon-les-bains</ion-label>
+              <ion-label>Yverdon-les-bain</ion-label>
               <ion-button fill="outline" slot="end">View</ion-button>
             </ion-item>
         </ion-card-header>
       </ion-card>
-      </ion-list>
+      
 
 </ion-content>
