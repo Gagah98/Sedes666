@@ -15,6 +15,14 @@ const routes: Routes = [
   
     ]
   },
+  {
+    path: 'add-bench',
+    loadChildren: () => import('./add-bench/add-bench.module').then( m => m.AddBenchPageModule)
+  },
+  {
+    path: 'map-bench',
+    loadChildren: () => import('./map-bench/map-bench.module').then( m => m.MapBenchPageModule)
+  },
  
  
 ];
