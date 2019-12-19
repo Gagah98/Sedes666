@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { AddBenchPageRoutingModule } from './add-bench-routing.module';
 import { AddBenchPage } from './add-bench.page';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { StarRatingModule } from 'ionic4-star-rating';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
     FormsModule,
     IonicModule,
     AddBenchPageRoutingModule,
-    LeafletModule
+    LeafletModule,
+    StarRatingModule
   ],
   declarations: [AddBenchPage]
 })

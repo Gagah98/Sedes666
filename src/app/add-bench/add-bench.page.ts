@@ -18,10 +18,10 @@ export class AddBenchPage implements OnInit {
       layers: [
         tileLayer(
           'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-          { maxZoom: 18 }
+          { maxZoom: 19 }
         )
       ],
-      zoom: 13,
+      zoom: 19,
       center: latLng(46.778186, 6.641524)
     };
   }
@@ -37,6 +37,20 @@ export class AddBenchPage implements OnInit {
 
   onMapReady(map: Map) {
     setTimeout(() => map.invalidateSize(), 0);
-  }
+
+    // wrap map.locate in a function    
+    function locate() {
+      map.locate({setView: true, maxZoom: 19});
+    }
+
+    // call locate every 3 seconds... forever
+    setInterval(locate, 3000);
+
+  };
+
+  logRatingChange(rating){
+        console.log("changed rating: ",rating);
+        // do your stuff
+    }
 
 }

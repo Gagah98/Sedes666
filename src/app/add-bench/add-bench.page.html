@@ -5,8 +5,43 @@
 </ion-header>
 
 <ion-content>
-  <div class="leaflet-map"
-  leaflet
-  [leafletOptions]="mapOptions"
-  (leafletMapReady)="onMapReady($event)">
-</div></ion-content>
+  <div class="leaflet-map" leaflet [leafletOptions]="mapOptions" (leafletMapReady)="onMapReady($event)">
+  </div>
+  <ion-item>
+    <ion-label position="floating">Description</ion-label>
+    <ion-input></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Nombre de places max</ion-label>
+    <ion-input></ion-input>
+  </ion-item>
+  <ion-list-header>Materials</ion-list-header>
+  <ion-item>
+    <ion-chip>
+      <ion-label>Bois</ion-label>
+    </ion-chip>
+    <ion-chip>
+      <ion-label>Acier</ion-label>
+    </ion-chip>
+    <ion-chip>
+      <ion-label>Pierre</ion-label>
+    </ion-chip>
+    <ion-chip>
+      <ion-label>Marbre</ion-label>
+    </ion-chip>
+    <ion-chip>
+      <ion-label>Plastique</ion-label>
+    </ion-chip>
+  </ion-item>
+  <ion-list-header>Materials</ion-list-header>
+  <ion-item>
+    <ionic4-star-rating #rating activeIcon="md-star" defaultIcon="md-star-outline" activeColor="#CAD802"
+      defaultColor="#CAD802" readonly="false" rating="0" fontSize="32px" (ratingChanged)="logRatingChange($event)">
+    </ionic4-star-rating>
+  </ion-item>
+  <ion-list-header>Détails</ion-list-header>
+  <ion-item>
+    <ion-label>Appuie-dos</ion-label>
+    <ion-toggle slot="start" name="dossier" color="light" checked></ion-toggle>
+  </ion-item>
+</ion-content>
