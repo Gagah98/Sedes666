@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment'
 
 import { Geolocation, Geoposition } from '@ionic-native/geolocation/ngx';
 
@@ -8,7 +10,8 @@ import { latLng, MapOptions, tileLayer, marker, Marker } from 'leaflet';
 
 import { defaultIcon } from '../icon/default-marker';
 
-
+import { Bench } from '../models/bench';
+import { BenchPage } from '../models/benchPage';
 
 @Component({
   selector: 'app-map-bench',
@@ -20,9 +23,12 @@ export class MapBenchPage implements OnInit {
   
   mapMarkers: Marker[];
 
+  benches: Bench[];
+
+
   constructor(
     private geolocation: Geolocation, private auth: AuthService,
-    private router: Router
+    private router: Router, public http: HttpClient
   ) { 
 
     this.mapMarkers = [
@@ -65,6 +71,14 @@ export class MapBenchPage implements OnInit {
         console.warn(`Could not retrieve user position because: ${err.message}`);
       }
     }); 
+  }
+
+  ionViewDidLoad(){
+    const benchesUrl = `${environment.apiUrl}/benches`
+  this.http.get<BenchPage>(benchesUrl).subscribe(result => {
+    console.log(`Benches loaded`, result);
+    this.benches = result.data;
+  });
   }
 
   logOut() {
