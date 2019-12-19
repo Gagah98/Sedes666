@@ -26,7 +26,6 @@ export class AuthService {
 
   constructor(private http: HttpClient, private storage: Storage) {
     this.authSource = new ReplaySubject(1);
-    this.authSource.next(undefined);
     this.auth$ = this.authSource.asObservable();
 
     this.storage.get('auth').then(auth => {
