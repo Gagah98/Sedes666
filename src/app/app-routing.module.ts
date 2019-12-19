@@ -25,6 +25,14 @@ const routes: Routes = [
   {
     path: "add-bench",
     loadChildren: () => import ("./add-bench/add-bench.module").then(m => m.AddBenchPageModule)
+  },
+  {
+    path: 'register',
+    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
   }
 
 

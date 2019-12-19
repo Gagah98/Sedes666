@@ -1,17 +1,29 @@
 <ion-app>
-  <ion-menu side="start" menuId="first" contentId="main">
+  <ion-menu side="start" menuId="first" contentId="main" type="push">
     <ion-header>
       <ion-toolbar color="primary">
-        <ion-title>Start Menu</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content>
       <ion-list>
-        <ion-item routerLink="/map-bench">Map-bench</ion-item>
-        <ion-item>Menu Item</ion-item>
-        <ion-item>Menu Item</ion-item>
-        <ion-item>Menu Item</ion-item>
-        <ion-item>Menu Item</ion-item>
+        <ion-item routerLink="/home">
+          <ion-icon name='bed'></ion-icon>
+          Benches
+        </ion-item>
+        <ion-item routerLink="/map-bench">
+          <ion-icon name='map'></ion-icon>
+          Map-bench
+        </ion-item>
+        <ion-item  routerLink="profile">
+          <ion-icon name='contact'></ion-icon>
+          Profile
+        </ion-item>
+        <ion-item (click)="logOut()" routerLink="/login">
+          <ion-icon name='log-out'></ion-icon>
+          Disconnect</ion-item>
+        <ion-item >
+          <ion-icon name='options'></ion-icon>
+          Preferences</ion-item>
       </ion-list>
     </ion-content>
   </ion-menu>

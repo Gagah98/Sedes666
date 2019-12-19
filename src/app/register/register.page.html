@@ -1,6 +1,6 @@
-<ion-header class="login-header">
+<ion-header class="register-header">
   <ion-toolbar>
-    <ion-title>Login</ion-title>
+    <ion-title>register</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -10,7 +10,7 @@
         <img class="logo-img center" src="../../assets/img/logo-sedes.png" alt="logo">       
     </ion-item>
 
-    <form #loginForm="ngForm" (submit)="onSubmit(loginForm)">
+    <form #registerForm="ngForm" (submit)="onSubmit(registerForm)">
         <ion-list>
           
           <!-- Username input -->
@@ -41,14 +41,14 @@
       
       
           <!-- Submit button -->
-          <ion-button class="submit-button center" type="submit" expand="block" [disabled]="loginForm.invalid">Log in</ion-button>
+          <ion-button class="submit-button center" type="submit" expand="block" [disabled]="registerForm.invalid">Join now</ion-button>
       
-          <!-- Error message displayed if the login failed -->
-          <ion-text class="submit-error center" color='danger' *ngIf="loginError">Username or password is invalid.</ion-text>
+          <!-- Error message displayed if the register failed -->
+          <ion-text class="submit-error center" color='danger' *ngIf="registerError">Username or password is invalid.</ion-text>
       
       </form>
-      <p class="ion-text-center">No account yet ?</p>
-      <a href="/register">
-        <ion-button fill="outline" class="register-button center" expand="block" >Register</ion-button>
+      <p class="ion-text-center">Already have an account ?</p>
+      <a href="/login" class="ion-text-center">
+        <p class="login-link">Login here</p>
       </a>
 </ion-content>
