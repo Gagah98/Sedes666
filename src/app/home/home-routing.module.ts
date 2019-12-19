@@ -16,7 +16,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'add-bench',
+    path: 'home/add-bench',
     loadChildren: () => import('./add-bench/add-bench.module').then( m => m.AddBenchPageModule)
   },
   {
