@@ -15,13 +15,19 @@ import { IonicStorageModule } from '@ionic/storage';
 
 import { AuthInterceptorProvider } from './auth/auth-interceptor.service';
 
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, IonicStorageModule.forRoot()],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, IonicStorageModule.forRoot(), LeafletModule.forRoot()],
   providers: [
     StatusBar,
     SplashScreen,
+    Geolocation,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorProvider, multi: true }
   ],

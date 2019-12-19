@@ -8,7 +8,6 @@ import { HomePageRoutingModule } from './home-routing.module';
 
 import { HomePage } from './home.page';
 
-import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 @NgModule({
   imports: [
@@ -17,7 +16,6 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
     IonicModule,
     HomePageRoutingModule
   ],
-  providers:[Geolocation],
   declarations: [HomePage]
 })
 export class HomePageModule {

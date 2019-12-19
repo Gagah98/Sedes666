@@ -8,12 +8,18 @@ import { MapBenchPageRoutingModule } from './map-bench-routing.module';
 
 import { MapBenchPage } from './map-bench.page';
 
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+
+
+
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    MapBenchPageRoutingModule
+    MapBenchPageRoutingModule,
+    LeafletModule    
   ],
   declarations: [MapBenchPage]
 })
