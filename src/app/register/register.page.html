@@ -1,0 +1,54 @@
+<ion-header class="register-header">
+  <ion-toolbar>
+    <ion-title>register</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-item>
+        <img class="logo-img center" src="../../assets/img/logo-sedes.png" alt="logo">       
+    </ion-item>
+
+    <form #registerForm="ngForm" (submit)="onSubmit(registerForm)">
+        <ion-list>
+          
+          <!-- Username input -->
+          <ion-item class="username-label center">
+            <ion-label position="floating">Username</ion-label>
+            <ion-input inputmode="text" #username="ngModel" required="true" name="username"
+              [(ngModel)]="authRequest.username"></ion-input>
+          </ion-item>
+      
+          <!-- Error message displayed if the username is invalid -->
+          <div class="label-error" lines="none" *ngIf="username.invalid && username.touched">
+            <p color='medium' class="ion-text-center">Username is required.</p>
+          </div>
+      
+          <!-- Password input -->
+          <ion-item class="password-label center">
+            <ion-label position="floating">Password</ion-label>
+            <ion-input inputmode="text" #password="ngModel" required="true" type="password" name="password"
+              [(ngModel)]="authRequest.password"></ion-input>
+          </ion-item>
+      
+          <!-- Error message displayed if the password is invalid -->
+          <div class="label-error" lines="none" *ngIf="password.invalid && password.touched">
+            <p color='medium' class="ion-text-center">Password is required.</p>
+          </div>
+      
+        </ion-list>
+      
+      
+          <!-- Submit button -->
+          <ion-button class="submit-button center" type="submit" expand="block" [disabled]="registerForm.invalid">Join now</ion-button>
+      
+          <!-- Error message displayed if the register failed -->
+          <ion-text class="submit-error center" color='danger' *ngIf="registerError">Username or password is invalid.</ion-text>
+      
+      </form>
+      <p class="ion-text-center">Already have an account ?</p>
+      <a href="/login" class="ion-text-center">
+        <p class="login-link">Login here</p>
+      </a>
+</ion-content>

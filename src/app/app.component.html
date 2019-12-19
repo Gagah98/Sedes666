@@ -1,5 +1,5 @@
 <ion-app>
-  <ion-menu side="start" menuId="first" contentId="main">
+  <ion-menu side="start" menuId="first" contentId="main" type="push">
     <ion-header>
       <ion-toolbar color="primary">
       </ion-toolbar>
@@ -14,14 +14,14 @@
           <ion-icon name='map'></ion-icon>
           Map-bench
         </ion-item>
-        <ion-item>
+        <ion-item  routerLink="profile">
           <ion-icon name='contact'></ion-icon>
           Profile
         </ion-item>
         <ion-item (click)="logOut()" routerLink="/login">
           <ion-icon name='log-out'></ion-icon>
           Disconnect</ion-item>
-        <ion-item>
+        <ion-item >
           <ion-icon name='options'></ion-icon>
           Preferences</ion-item>
       </ion-list>

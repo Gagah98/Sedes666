@@ -8,7 +8,7 @@
       <ion-button (click)="search()">
         <ion-icon name='search'></ion-icon>
       </ion-button>
-      <ion-button (click)="account()">
+      <ion-button routerLink="/profile">
         <ion-icon name='contact'></ion-icon>
       </ion-button>
       <ion-button (click)="logOut()">
@@ -30,9 +30,9 @@
               <ion-icon name="pin" slot="start"></ion-icon>
               <ion-label>Yverdon-les-bain</ion-label>
               <ion-buttons slot="end">
-                <ion-icon class="score-arrow" name="arrow-up"></ion-icon>
+                <ion-icon (click)="scoreUp(bench.score)" class="score-arrow" name="arrow-up"></ion-icon>
                 <ion-label>{{bench.score}}</ion-label>
-                <ion-icon class="score-arrow" name="arrow-down"></ion-icon>
+                <ion-icon (click)="scoreDown(bench.score)" class="score-arrow" name="arrow-down"></ion-icon>
               </ion-buttons>
             </ion-item>
         </ion-card-header>
