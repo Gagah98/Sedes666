@@ -1,3 +1,5 @@
+import {Coordinate} from "./coordinate"
+
 export class Bench {
     _id: string;
     userId: string;
@@ -10,4 +12,5 @@ export class Bench {
     material:string
     creationDate:string;
     modifDate:string;
+    location:Array<Coordinate>;
   }

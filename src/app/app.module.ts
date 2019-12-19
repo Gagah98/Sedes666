@@ -19,7 +19,6 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
-
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
