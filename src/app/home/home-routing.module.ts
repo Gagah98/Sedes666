@@ -7,22 +7,9 @@ const routes: Routes = [
   {
     path: '',
     component: HomePage,
-    children: [
-      {
-        path: 'bench',
-        loadChildren: () => import('./bench/bench.module').then( m => m.BenchPageModule)
-      },
-  
-    ]
+
   },
-  {
-    path: 'add-bench',
-    loadChildren: () => import('./add-bench/add-bench.module').then( m => m.AddBenchPageModule)
-  },
-  {
-    path: 'map-bench',
-    loadChildren: () => import('./map-bench/map-bench.module').then( m => m.MapBenchPageModule)
-  },
+
  
  
 ];
