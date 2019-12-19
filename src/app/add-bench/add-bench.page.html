@@ -5,5 +5,8 @@
 </ion-header>
 
 <ion-content>
-
-</ion-content>
+  <div class="leaflet-map"
+  leaflet
+  [leafletOptions]="mapOptions"
+  (leafletMapReady)="onMapReady($event)">
+</div></ion-content>
