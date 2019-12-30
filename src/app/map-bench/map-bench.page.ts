@@ -12,6 +12,8 @@ import { defaultIcon } from '../icon/default-marker';
 
 import { Bench } from '../models/bench';
 import { BenchPage } from '../models/benchPage';
+import {Coordinate} from "../models/coordinate"
+import {Location} from "../models/location"
 
 @Component({
   selector: 'app-map-bench',
@@ -25,17 +27,16 @@ export class MapBenchPage implements OnInit {
 
   benches: Bench[];
 
+  locations: Location[];
+
+  coordinates: Coordinate[];
+
 
   constructor(
     private geolocation: Geolocation, private auth: AuthService,
     private router: Router, public http: HttpClient
   ) { 
 
-    this.mapMarkers = [
-      marker([ 46.778186, 6.641524 ], { icon: defaultIcon }).bindTooltip('Hello'),
-      marker([ 46.780796, 6.647395 ], { icon: defaultIcon }),
-      marker([ 46.784992, 6.652267 ], { icon: defaultIcon })
-    ];
 
     this.mapOptions = {
       layers: [
@@ -71,6 +72,8 @@ export class MapBenchPage implements OnInit {
         console.warn(`Could not retrieve user position because: ${err.message}`);
       }
     }); 
+    this.ionViewDidLoad()
+
   }
 
   ionViewDidLoad(){
@@ -78,7 +81,28 @@ export class MapBenchPage implements OnInit {
   this.http.get<BenchPage>(benchesUrl).subscribe(result => {
     console.log(`Benches loaded`, result);
     this.benches = result.data;
+    this.locations = this.benches.map(bench => bench.location)
+    console.log(this.locations)
+    this.coordinates = this.locations.map(location => location.coordinates)
+    console.log(this.coordinates[0][0])
+
+    this.mapMarkers = [
+      marker([this.coordinates[0][0], this.coordinates[0][1]], { icon: defaultIcon }),
+      marker([this.coordinates[1][0], this.coordinates[1][1]], { icon: defaultIcon }),
+      marker([this.coordinates[2][0], this.coordinates[2][1]], { icon: defaultIcon }),
+      marker([this.coordinates[3][0], this.coordinates[3][1]], { icon: defaultIcon })
+
+    ]
+  /*  let geoloc = this.coordinates.map(coordinate =>{
+    marker([coordinate[0], coordinate[1]], { icon: defaultIcon })
+    }) */
+
+
+
+
+  
   });
+
   }
 
   logOut() {
@@ -86,6 +110,11 @@ export class MapBenchPage implements OnInit {
     this.auth.logOut();
     this.router.navigateByUrl('/login');
   }
+
+  getCoordinates(){
+    
+  }
+  
 
 
 }

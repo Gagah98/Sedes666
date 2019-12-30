@@ -30,6 +30,9 @@ export class RegisterPage implements OnInit {
     this.authRequest = new AuthRequest();
   }
 
+  ngOnInit() {
+  }
+
   /**
    * Called when the login form is submitted.
    */
