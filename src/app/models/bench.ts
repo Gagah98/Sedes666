@@ -1,4 +1,4 @@
-import {Coordinate} from "./coordinate"
+import {Location} from "./location"
 
 export class Bench {
     _id: string;
@@ -12,5 +12,5 @@ export class Bench {
     material:string
     creationDate:string;
     modifDate:string;
-    location:Array<Coordinate>;
+    location:Location;
   }
