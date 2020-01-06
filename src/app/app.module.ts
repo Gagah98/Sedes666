@@ -19,14 +19,25 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
+import { ImagePicker } from '@ionic-native/image-picker/ngx';
+
+import { Crop } from '@ionic-native/crop/ngx';
+
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
+
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, IonicStorageModule.forRoot(), LeafletModule.forRoot()],
   providers: [
+    Crop,
     StatusBar,
     SplashScreen,
     Geolocation,
+    FileTransfer,
+    FileTransferObject,
+    ImagePicker,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorProvider, multi: true }
   ],

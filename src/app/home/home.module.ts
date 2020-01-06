@@ -8,6 +8,8 @@ import { HomePageRoutingModule } from './home-routing.module';
 
 import { HomePage } from './home.page';
 
+import {QimpService} from './../qimp/qimp.service'
+import { Observable } from 'rxjs';
 
 @NgModule({
   imports: [
@@ -19,6 +21,16 @@ import { HomePage } from './home.page';
   declarations: [HomePage]
 })
 export class HomePageModule {
+    results: any;
+    image: string;
 
+    constructor(private qimpService: QimpService){}
+
+    getImage(){
+      this.qimpService.getImages().subscribe((response) => {
+        console.log(response);
+        this.results = response;
+      });
+    }
   
 }
