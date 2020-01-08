@@ -21,7 +21,8 @@
 <ion-content>
   <div class="map" 
   leaflet 
-  [leafletOptions]="mapOptions" 
+  [leafletOptions]="mapOptions"
+  [(leafletCenter)]="mapOptions.center" 
   (leafletMapReady)="onMapReady($event)"
   [leafletLayers]="mapMarkers">
   </div>

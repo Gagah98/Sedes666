@@ -21,11 +21,11 @@ export class AddBenchPage implements OnInit {
           { maxZoom: 19 }
         )
       ],
-      zoom: 19,
+      zoom: 13,
       center: latLng(46.778186, 6.641524)
     };
   }
-
+  
   ngOnInit() {
        this.geolocation.getCurrentPosition().then((position: Geoposition ) => {
            const coords = position.coords;
