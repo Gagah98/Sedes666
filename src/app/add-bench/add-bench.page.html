@@ -4,16 +4,11 @@
   </ion-toolbar>
 </ion-header>
 
-  <ion-card>
-    <img *ngIf="!fileUrl" src="assets/no-image.jpeg"/>
-    <img *ngIf="fileUrl" src="{{fileUrl}}"/>
-    <ion-card-content>
-      <ion-button color="medium" size="large" (click)="cropUpload()">
-        <ion-icon slot="icon-only" name="camera"></ion-icon>
-      </ion-button>
-    </ion-card-content>
-  </ion-card>
 <ion-content>
+  <img *ngIf="!fileUrl" src="assets/no-image.jpeg"/>
+  <img *ngIf="fileUrl" src="{{fileUrl}}"/>
+    <ion-button (click)='takePicture()'>Take picture</ion-button>
+      <img *ngIf="pictureData" src="data:image/jpeg;base64,{{ pictureData }}" />
   <div class="leaflet-map" leaflet [leafletOptions]="mapOptions" (leafletMapReady)="onMapReady($event)">
   </div>
   <ion-item>

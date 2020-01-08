@@ -25,6 +25,8 @@ import { Crop } from '@ionic-native/crop/ngx';
 
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 
+import { Camera } from '@ionic-native/camera/ngx';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -35,6 +37,7 @@ import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-nati
     StatusBar,
     SplashScreen,
     Geolocation,
+    Camera,
     FileTransfer,
     FileTransferObject,
     ImagePicker,

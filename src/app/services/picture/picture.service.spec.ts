@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { QimpService } from './qimp.service';
+import { PictureService } from './picture.service';
 
-describe('QimpService', () => {
+describe('PictureService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: QimpService = TestBed.get(QimpService);
+    const service: PictureService = TestBed.get(PictureService);
     expect(service).toBeTruthy();
   });
 });
