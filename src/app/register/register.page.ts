@@ -1,40 +1,42 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { first } from 'rxjs/operators';
 
-import { AuthService } from '../auth/auth.service';
-import { AuthRequest } from '../models/auth-request';
+//import { AuthService } from '../auth/auth.service';
+import { RegisterRequest } from '../models/register-request';
+import { RegisterService } from './register.service'
 
+/**
+ * register page.
+ */
 @Component({
-  templateUrl: './register.page.html',
-  styleUrls: ['./register.page.scss'],
+  templateUrl: 'register.page.html',
+  styleUrls: ['register.page.scss']
 })
-export class RegisterPage implements OnInit {
+export class RegisterPage {
 
   /**
    * This authentication request object will be updated when the user
-   * edits the login form. It will then be sent to the API.
+   * edits the register form. It will then be sent to the API.
    */
-  authRequest: AuthRequest;
+  registerRequest: RegisterRequest;
 
   /**
    * If true, it means that the authentication API has return a failed response
    * (probably because the name or password is incorrect).
    */
-  loginError: boolean;
+  registerError: boolean;
 
   constructor(
-    private auth: AuthService,
+    private registerService: RegisterService,
     private router: Router
   ) {
-    this.authRequest = new AuthRequest();
-  }
-
-  ngOnInit() {
+    this.registerRequest = new RegisterRequest();
   }
 
   /**
-   * Called when the login form is submitted.
+   * Called when the register form is submitted.
    */
   onSubmit(form: NgForm) {
 
@@ -44,17 +46,19 @@ export class RegisterPage implements OnInit {
     }
 
     
-    // Hide any previous login error.
-    this.loginError = false;
+    // Hide any previous register error.
+    this.registerError = false;
 
     // Perform the authentication request to the API.
-    this.auth.logIn(this.authRequest).subscribe({
+    this.registerService.register(this.registerRequest)
+    .pipe(first())
+    .subscribe({
       next: () => {
         this.router.navigateByUrl('/home');
       },
       error: err => {
-        console.log(this.authRequest)
-        this.loginError = true;
+        console.log(this.registerRequest)
+        this.registerError = true;
         console.warn(`Authentication failed: ${err.message}`);
       }
     });
