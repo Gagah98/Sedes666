@@ -5,12 +5,22 @@
 </ion-header>
 
 <ion-content>
-  <img *ngIf="!fileUrl" src="assets/no-image.jpeg"/>
-  <img *ngIf="fileUrl" src="{{fileUrl}}"/>
-    <ion-button (click)='takePicture()'>Take picture</ion-button>
-      <img *ngIf="pictureData" src="data:image/jpeg;base64,{{ pictureData }}" />
-  <div class="leaflet-map" leaflet [leafletOptions]="mapOptions" (leafletMapReady)="onMapReady($event)">
-  </div>
+  <!-- <img *ngIf="!fileUrl" src="assets/no-image.jpeg"/>
+  <img *ngIf="fileUrl" src="{{fileUrl}}"/> -->
+    <div *ngIf="pictureData">
+      <img  src="data:image/jpeg;base64,{{ pictureData }}" />
+      <ion-chip color="sucess" (click)='takePicture()'>
+        <ion-icon name="close-circle" color="primary"></ion-icon>
+        <ion-label>Changer la photo</ion-label>
+      </ion-chip>
+      </div>
+
+    <div *ngIf="!pictureData">
+    <ion-chip color="secondary" (click)='takePicture()'>
+      <ion-icon name="add-circle" color="primary"></ion-icon>
+      <ion-label>Prendre une photo</ion-label>
+    </ion-chip>
+    </div>
   <ion-item>
     <ion-label position="floating">Description</ion-label>
     <ion-input></ion-input>
@@ -21,21 +31,23 @@
   </ion-item>
   <ion-list-header>Materials</ion-list-header>
   <ion-item>
-    <ion-chip>
-      <ion-label>Bois</ion-label>
-    </ion-chip>
-    <ion-chip>
-      <ion-label>Acier</ion-label>
-    </ion-chip>
-    <ion-chip>
-      <ion-label>Pierre</ion-label>
-    </ion-chip>
-    <ion-chip>
-      <ion-label>Marbre</ion-label>
-    </ion-chip>
-    <ion-chip>
-      <ion-label>Plastique</ion-label>
-    </ion-chip>
+    <p>
+      <ion-chip class="materials" (click)="selected()" outline color="secondary">
+        <ion-label>Bois</ion-label>
+      </ion-chip>
+      <ion-chip class="materials" (click)="selected()" outline color="secondary">
+        <ion-label>Acier</ion-label>
+      </ion-chip>
+      <ion-chip class="materials" (click)="selected()" outline color="secondary">
+        <ion-label>Pierre</ion-label>
+      </ion-chip>
+      <ion-chip class="materials" (click)="selected()" outline color="secondary">
+        <ion-label>Plastique</ion-label>
+      </ion-chip>
+      <ion-chip class="materials" (click)="selected()" outline color="secondary">
+        <ion-label>Marbre</ion-label>      
+      </ion-chip>
+  </p>
   </ion-item>
   <ion-list-header>Materials</ion-list-header>
   <ion-item>
@@ -46,6 +58,12 @@
   <ion-list-header>Détails</ion-list-header>
   <ion-item>
     <ion-label>Appuie-dos</ion-label>
-    <ion-toggle slot="start" name="dossier" color="light" checked></ion-toggle>
-  </ion-item>
+    <ion-toggle slot="start" name="backrest" color="success" checked></ion-toggle>
+    </ion-item>
+    <div style="margin-left: 15px; margin-right: 15px;" class="leaflet-map" leaflet [leafletOptions]="mapOptions" (leafletMapReady)="onMapReady($event)">
+  </div>
+  <ion-button (click)="uploadBench()">
+    Publier
+  </ion-button>
+
 </ion-content>
