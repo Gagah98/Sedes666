@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Geolocation, Geoposition } from '@ionic-native/geolocation/ngx';
 import { latLng, MapOptions, tileLayer, Map } from 'leaflet';
+import { Crop } from '@ionic-native/crop/ngx';
+import { ImagePicker } from '@ionic-native/image-picker/ngx';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
+import { QimgImage } from '../models/qimg-image';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { PictureService } from '../services/picture/picture.service'
 
 @Component({
   selector: 'app-add-bench',
@@ -10,10 +16,22 @@ import { latLng, MapOptions, tileLayer, Map } from 'leaflet';
 export class AddBenchPage implements OnInit {
 
   mapOptions: MapOptions;
+  fileUrl: any = null;
+  respData: any;
+  results: any;
+  image: string;
+  pictureData: string;
+  picture: QimgImage;
 
   constructor(
-    private geolocation: Geolocation
+    private geolocation: Geolocation,
+    private imagePicker: ImagePicker,
+    private crop: Crop,
+    private transfer: FileTransfer,
+    private camera: Camera,
+    private pictureService: PictureService,
   ) {
+
     this.mapOptions = {
       layers: [
         tileLayer(
@@ -21,11 +39,11 @@ export class AddBenchPage implements OnInit {
           { maxZoom: 19 }
         )
       ],
-      zoom: 19,
+      zoom: 13,
       center: latLng(46.778186, 6.641524)
     };
   }
-
+  
   ngOnInit() {
        this.geolocation.getCurrentPosition().then((position: Geoposition ) => {
            const coords = position.coords;
@@ -53,4 +71,14 @@ export class AddBenchPage implements OnInit {
         // do your stuff
     }
 
+  takePicture() {
+         this.pictureService.takeAndUploadPicture().subscribe(picture => {
+        this.picture = picture;
+      }, err => {
+        console.warn('Could not take picture', err);
+      });
+    }
+    uploadBench() {
+      console.log("UP")
 }
+};

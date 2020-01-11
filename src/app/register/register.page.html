@@ -17,7 +17,7 @@
           <ion-item class="username-label center">
             <ion-label position="floating">Username</ion-label>
             <ion-input inputmode="text" #username="ngModel" required="true" name="username"
-              [(ngModel)]="authRequest.username"></ion-input>
+              [(ngModel)]="registerRequest.username"></ion-input>
           </ion-item>
       
           <!-- Error message displayed if the username is invalid -->
@@ -29,7 +29,7 @@
           <ion-item class="password-label center">
             <ion-label position="floating">Password</ion-label>
             <ion-input inputmode="text" #password="ngModel" required="true" type="password" name="password"
-              [(ngModel)]="authRequest.password"></ion-input>
+              [(ngModel)]="registerRequest.password"></ion-input>
           </ion-item>
       
           <!-- Error message displayed if the password is invalid -->
@@ -44,7 +44,7 @@
           <ion-button class="submit-button center" type="submit" expand="block" [disabled]="registerForm.invalid">Join now</ion-button>
       
           <!-- Error message displayed if the register failed -->
-          <ion-text class="submit-error center" color='danger' *ngIf="registerError">Username or password is invalid.</ion-text>
+         <ion-text class="submit-error center" color='danger' *ngIf="registerError">Username or password is invalid.</ion-text>
       
       </form>
       <p class="ion-text-center">Already have an account ?</p>

@@ -19,4 +19,7 @@ import { StarRatingModule } from 'ionic4-star-rating';
   ],
   declarations: [AddBenchPage]
 })
-export class AddBenchPageModule {}
+export class AddBenchPageModule {
+  
+
+}

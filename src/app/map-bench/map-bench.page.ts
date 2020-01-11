@@ -6,7 +6,7 @@ import {environment} from "src/environments/environment";
 
 import {Geolocation, Geoposition} from "@ionic-native/geolocation/ngx";
 
-import {latLng, MapOptions, tileLayer, marker, Marker} from "leaflet";
+import {latLng, MapOptions, tileLayer, marker, Marker, Map} from "leaflet";
 
 import {defaultIcon} from "../icon/default-marker";
 
@@ -35,10 +35,8 @@ export class MapBenchPage implements OnInit {
     };
   }
 
-  onMapReady(map : L.Map) {
-    setTimeout(() => {
-      map.invalidateSize();
-    }, 0);
+  onMapReady(map: Map) {
+    setTimeout(() => map.invalidateSize(), 0);
   }
 
   ngOnInit() {
@@ -49,10 +47,10 @@ export class MapBenchPage implements OnInit {
       console.warn(`Could not retrieve user position because: ${err.message}`);
     });
     const trackingSubscription = this.geolocation.watchPosition().subscribe({
-      next: (position : Geoposition) => {
+      next: (position: Geoposition) => {
         const coords = position.coords;
-        this.mapOptions.center = latLng(coords.longitude, coords.latitude)
         console.log(`User is at ${coords.longitude}, ${coords.latitude}`);
+        this.mapOptions.center = latLng(coords.latitude, coords.longitude);
       },
       error: err => {
         console.warn(`Could not retrieve user position because: ${err.message}`);
@@ -61,6 +59,7 @@ export class MapBenchPage implements OnInit {
     
     this.ionViewDidLoad();
   }
+
 
   ionViewDidLoad() {
     const benchesUrl = `${environment.apiUrl}/benches`;
