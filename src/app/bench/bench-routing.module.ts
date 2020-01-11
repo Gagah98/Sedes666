@@ -5,7 +5,7 @@ import { BenchPage } from './bench.page';
 
 const routes: Routes = [
   {
-    path: '',
+    path: ':id',
     component: BenchPage
   }
 ];

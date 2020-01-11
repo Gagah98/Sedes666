@@ -30,7 +30,7 @@ export class MapBenchPage implements OnInit {
   constructor(private geolocation : Geolocation, private auth : AuthService, private router : Router, public http : HttpClient) {
     this.mapOptions = {
       layers: [tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {maxZoom: 18})],
-      zoom: 13,
+      zoom: 9,
       center: latLng(46.778186, 6.641524)
     };
   }

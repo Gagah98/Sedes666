@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Add-bench</ion-title>
+    <ion-buttons slot="start">
+        <ion-back-button defaultHref="/"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Ajouter un banc</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -42,6 +45,6 @@
   <ion-list-header>Détails</ion-list-header>
   <ion-item>
     <ion-label>Appuie-dos</ion-label>
-    <ion-toggle slot="start" name="dossier" color="light" checked></ion-toggle>
+    <ion-toggle slot="start" name="dossier" color="success" checked></ion-toggle>
   </ion-item>
 </ion-content>

@@ -1,6 +1,10 @@
 import {NgModule} from "@angular/core";
 import {PreloadAllModules, RouterModule, Routes} from "@angular/router";
 import {AuthGuard} from "./auth/auth.guard";
+import { HomePage } from './home/home.page';
+import { BenchPage } from './models/benchPage';
+import { HomePageModule } from './home/home.module';
+import { BenchPageModule } from './bench/bench.module';
 
 const routes: Routes = [
   {
@@ -33,7 +37,11 @@ const routes: Routes = [
   {
     path: 'profile',
     loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
-  }
+  },
+
+  { path: '', redirectTo: 'bench', pathMatch: 'full' },
+  { path: '', component: HomePageModule },
+  { path: 'bench/:id', component: BenchPageModule }
 
 
 ];

@@ -25,12 +25,9 @@ export class HomePage implements OnInit {
   benches: Bench[];
 
   constructor( private auth: AuthService,
-    private router: Router, public http: HttpClient) { 
-   
+    private router: Router,
+    public http: HttpClient) { 
   }
-
-  
-  
 
   ngOnInit() {
     this.ionViewDidLoad();
@@ -43,7 +40,6 @@ export class HomePage implements OnInit {
     this.benches = result.data;
   });
   }
-
 
   logOut() {
     console.log('logging out...');
