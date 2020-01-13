@@ -8,6 +8,7 @@ import {FileTransfer, FileUploadOptions, FileTransferObject} from "@ionic-native
 import {QimgImage} from "../models/qimg-image";
 import {Camera, CameraOptions} from "@ionic-native/camera/ngx";
 import {PictureService} from "../services/picture/picture.service";
+import {Storage} from "@ionic/storage";
 
 import {BenchRequest} from "../models/bench-request";
 import {AddBenchService} from "./add-bench.service";
@@ -16,7 +17,7 @@ import {first} from "rxjs/operators";
 import {AuthService} from "../auth/auth.service";
 import {Coordinate} from "../models/coordinate";
 import {Location} from "../models/location";
-import {User} from "../models/user"
+import {User} from "../models/user";
 
 @Component({selector: "app-add-bench", templateUrl: "./add-bench.page.html", styleUrls: ["./add-bench.page.scss"]})
 export class AddBenchPage implements OnInit {
@@ -33,9 +34,9 @@ export class AddBenchPage implements OnInit {
 
   locations: Location;
   coordinates: Coordinate[];
-  user : User;
+  user: User;
 
-  constructor(private geolocation : Geolocation, private imagePicker : ImagePicker, private crop : Crop, private transfer : FileTransfer, private camera : Camera, private pictureService : PictureService, private addBenchService : AddBenchService, private router : Router, private auth : AuthService) {
+  constructor(private geolocation : Geolocation, private imagePicker : ImagePicker, private crop : Crop, private transfer : FileTransfer, private camera : Camera, private pictureService : PictureService, private addBenchService : AddBenchService, private router : Router, private auth : AuthService, private storage : Storage) {
     this.benchRequest = new BenchRequest();
 
     this.mapOptions = {
@@ -49,6 +50,11 @@ export class AddBenchPage implements OnInit {
     this.geolocation.getCurrentPosition().then((position : Geoposition) => {
       const coords = position.coords;
       console.log(`User is at ${coords.longitude}, ${coords.latitude}`);
+      this.mapOptions.center = latLng(coords.latitude, coords.longitude);
+      this.locations = {
+        type: "Point",
+        coordinates: [coords.latitude, coords.longitude]
+      };
     }).catch(err => {
       console.warn(`Could not retrieve user position because: ${err.message}`);
     });
@@ -57,7 +63,7 @@ export class AddBenchPage implements OnInit {
       next: (position : Geoposition) => {
         const coords = position.coords;
         console.log(`User is at ${coords.longitude}, ${coords.latitude}`);
-        this.mapOptions.center = latLng(coords.latitude, coords.longitude);
+        
       },
       error: err => {
         console.warn(`Could not retrieve user position because: ${err.message}`);
@@ -93,7 +99,6 @@ export class AddBenchPage implements OnInit {
   }
 
   onSubmit(form : NgForm) {
-
     event.preventDefault();
     // Do not do anything if the form is invalid.
     if (form.invalid) {
@@ -102,13 +107,17 @@ export class AddBenchPage implements OnInit {
 
     this.addBenchError = false;
 
+    this.benchRequest.image = !this.picture
+      ? "../../assets/img/logo-sedes.png"
+      : this.picture.url;
+   
+      this.storage.get('user_id').then((val) => {
+        this.benchRequest.userId = val
+      })
 
-    this.benchRequest.image = (!this.picture) ? "../../assets/img/logo-sedes.png" : this.picture.url;
-    this.benchRequest.userId = "5e15c7103df0b90017551a31";
-    this.locations = {
-      type:"Point",
-      coordinates: [52.37366, 4.896888]
-    };
+    
+
+   
     this.benchRequest.location = this.locations;
 
     this.addBenchService.postBench(this.benchRequest).pipe(first()).subscribe({
