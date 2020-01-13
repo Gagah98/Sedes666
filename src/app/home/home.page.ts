@@ -38,7 +38,9 @@ export class HomePage implements OnInit {
   this.http.get<BenchPage>(benchesUrl).subscribe(result => {
     console.log(`Benches loaded`, result);
     this.benches = result.data;
+    
   });
+
   }
 
   logOut() {

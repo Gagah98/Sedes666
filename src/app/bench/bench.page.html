@@ -12,7 +12,7 @@
   <ion-card *ngIf="bench">
     <img src={{bench.image}} />
     <ion-card-header>
-      <ion-card-subtitle>{{bench.location.coordinates[0]}}, {{bench.location.coordinates[1]}}</ion-card-subtitle>
+      <ion-card-subtitle>{{this.benchAddress}}</ion-card-subtitle>
       <ion-card-title>{{bench.description}}</ion-card-title>
     </ion-card-header>
     <ion-card-content>
