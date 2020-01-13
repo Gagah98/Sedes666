@@ -50,8 +50,9 @@ export class BenchPage implements OnInit, OnDestroy {
         + '&pretty=1'
         + '&no_annotations=1';
 
-      this.http.get(request_url).subscribe(result => {
+      this.http.get(request_url).subscribe((result: any) => {
         this.benchAddress = result.results[0].formatted;
+        console.log(this.benchAddress);
       });
 
     });
