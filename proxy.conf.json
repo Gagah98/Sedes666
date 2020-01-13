@@ -1,0 +1,6 @@
+{
+  "/geocode": {
+    "target": "https://api.opencagedata.com",
+    "secure": false
+  }
+}
