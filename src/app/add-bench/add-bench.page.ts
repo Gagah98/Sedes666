@@ -16,6 +16,7 @@ import {first} from "rxjs/operators";
 import {AuthService} from "../auth/auth.service";
 import {Coordinate} from "../models/coordinate";
 import {Location} from "../models/location";
+import {User} from "../models/user"
 
 @Component({selector: "app-add-bench", templateUrl: "./add-bench.page.html", styleUrls: ["./add-bench.page.scss"]})
 export class AddBenchPage implements OnInit {
@@ -32,6 +33,7 @@ export class AddBenchPage implements OnInit {
 
   locations: Location;
   coordinates: Coordinate[];
+  user : User;
 
   constructor(private geolocation : Geolocation, private imagePicker : ImagePicker, private crop : Crop, private transfer : FileTransfer, private camera : Camera, private pictureService : PictureService, private addBenchService : AddBenchService, private router : Router, private auth : AuthService) {
     this.benchRequest = new BenchRequest();

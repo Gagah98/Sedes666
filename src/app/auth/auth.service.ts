@@ -60,7 +60,7 @@ export class AuthService {
         return this.saveAuth(auth);
       }), 
       map(auth => {
-        console.log(`User logged in`, auth);
+        console.log(`User ${auth.user.username} logged in`);
         this.authSource.next(auth);
         return auth.user;
       })

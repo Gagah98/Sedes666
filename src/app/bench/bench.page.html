@@ -10,7 +10,7 @@
 
 <ion-content>
   <ion-card *ngIf="bench">
-    <img src="\assets\img\logo-sedes.png" />
+    <img src={{bench.image}} />
     <ion-card-header>
       <ion-card-subtitle>{{bench.location.coordinates[0]}}, {{bench.location.coordinates[1]}}</ion-card-subtitle>
       <ion-card-title>{{bench.description}}</ion-card-title>
