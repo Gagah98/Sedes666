@@ -63,6 +63,7 @@ export class AuthService {
         console.log(`User logged in`, auth);
         this.authSource.next(auth);
         this.storage.set('user_id', auth.user._id)
+        this.storage.set('username', auth.user.username)
         return auth.user;
       })
     );
