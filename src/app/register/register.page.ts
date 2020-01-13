@@ -49,7 +49,7 @@ export class RegisterPage {
     // Hide any previous register error.
     this.registerError = false;
 
-    // Perform the authentication request to the API.
+    // Perform the registration + authentification request to the API.
     this.registerService.register(this.registerRequest)
     .pipe(first())
     .subscribe({
@@ -59,7 +59,7 @@ export class RegisterPage {
       error: err => {
         console.log(this.registerRequest)
         this.registerError = true;
-        console.warn(`Authentication failed: ${err.message}`);
+        console.warn(`Register failed: ${err.message}`);
       }
     });
   }
