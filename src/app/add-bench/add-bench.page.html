@@ -8,6 +8,12 @@
 </ion-header>
 
 <ion-content>
+
+
+
+  <form #addBenchForm="ngForm" (submit)="onSubmit(addBenchForm)">
+    <div style="margin-left: 15px; margin-right: 15px;" class="leaflet-map" leaflet [leafletOptions]="mapOptions"  [(leafletCenter)]="mapOptions.center"  (leafletMapReady)="onMapReady($event)">
+    </div>
   <!-- <img *ngIf="!fileUrl" src="assets/no-image.jpeg"/>
   <img *ngIf="fileUrl" src="{{fileUrl}}"/> -->
     <div *ngIf="pictureData">
@@ -26,47 +32,65 @@
     </div>
   <ion-item>
     <ion-label position="floating">Description</ion-label>
-    <ion-input></ion-input>
+    <ion-input inputmode="text" #description="ngModel" required="true" name="description"  [(ngModel)]="benchRequest.description"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label position="floating">Nombre de places max</ion-label>
-    <ion-input></ion-input>
+    <ion-input inputmode="text" #seats="ngModel" required="true" name="seats"  [(ngModel)]="benchRequest.seats"></ion-input>
   </ion-item>
-  <ion-list-header>Materials</ion-list-header>
+  <ion-list-header>Materiels</ion-list-header>
   <ion-item>
+    <ion-item>
+      <ion-label>Materiel</ion-label>
+      <ion-select okText="Valider" cancelText="Annuler" #material="ngModel" name="material"  [(ngModel)]="benchRequest.material">
+        <ion-select-option selected value="Wood">Bois</ion-select-option>
+        <ion-select-option value="Metal">Metal</ion-select-option>
+        <ion-select-option value="Stone">Pierre</ion-select-option>
+        <ion-select-option value="Plastic">Plastique</ion-select-option>
+        <ion-select-option value="Marble">Marbre</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-item>
+<!--   <ion-item > 
     <p>
-      <ion-chip class="materials" (click)="selected()" outline color="secondary">
+      <ion-chip  class="materials" value="Wood" (click)="selected()" outline color="secondary">
         <ion-label>Bois</ion-label>
       </ion-chip>
-      <ion-chip class="materials" (click)="selected()" outline color="secondary">
+      <ion-chip class="materials" value="Metal" (click)="selected()" outline color="secondary">
         <ion-label>Acier</ion-label>
       </ion-chip>
-      <ion-chip class="materials" (click)="selected()" outline color="secondary">
+      <ion-chip class="materials" value="Stone" (click)="selected()" outline color="secondary">
         <ion-label>Pierre</ion-label>
       </ion-chip>
-      <ion-chip class="materials" (click)="selected()" outline color="secondary">
+      <ion-chip class="materials" value="Plastic"(click)="selected()" outline color="secondary">
         <ion-label>Plastique</ion-label>
       </ion-chip>
-      <ion-chip class="materials" (click)="selected()" outline color="secondary">
+      <ion-chip class="materials" value="Marble" (click)="selected()" outline color="secondary">
         <ion-label>Marbre</ion-label>      
       </ion-chip>
-  </p>
-  </ion-item>
-  <ion-list-header>Materials</ion-list-header>
+    </p>
+  </ion-item> -->
+
+  <ion-list-header>Ergonomie</ion-list-header>
   <ion-item>
-    <ionic4-star-rating #rating activeIcon="md-star" defaultIcon="md-star-outline" activeColor="#CAD802"
-      defaultColor="#CAD802" readonly="false" rating="0" fontSize="32px" (ratingChanged)="logRatingChange($event)">
+    <ionic4-star-rating  activeIcon="md-star" defaultIcon="md-star-outline" activeColor="#CAD802"
+      defaultColor="#CAD802" readonly="false" rating="0" fontSize="32px" #ergonomy="ngModel"  name="ergonomy"  [(ngModel)]="benchRequest.ergonomy">
     </ionic4-star-rating>
   </ion-item>
   <ion-list-header>Détails</ion-list-header>
   <ion-item>
     <ion-label>Appuie-dos</ion-label>
-    <ion-toggle slot="start" name="backrest" color="success" checked></ion-toggle>
+    <ion-toggle checked="true" #backrest="ngModel"  name="backrest"  [(ngModel)]="benchRequest.backrest" slot="start"  color="success" ></ion-toggle>
     </ion-item>
-    <div style="margin-left: 15px; margin-right: 15px;" class="leaflet-map" leaflet [leafletOptions]="mapOptions" (leafletMapReady)="onMapReady($event)">
-  </div>
-  <ion-button (click)="uploadBench()">
-    Publier
-  </ion-button>
+ 
+  <!-- Submit button -->
+  <ion-button class="submit-button center" type="submit" expand="block" [disabled]="addBenchForm.invalid">Publish</ion-button>
+
+  
+      
+  <!-- Error message displayed if the register failed -->
+ <ion-text class="submit-error center" color='danger' *ngIf="addBenchError">Username or password is invalid.</ion-text>
+
+</form>
 
 </ion-content>
