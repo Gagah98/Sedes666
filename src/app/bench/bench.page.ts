@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Bench } from '../models/bench';
-import * as opencage from 'opencage-api-client';
 
 @Component({
   selector: 'app-bench',
@@ -14,7 +13,7 @@ import * as opencage from 'opencage-api-client';
 export class BenchPage implements OnInit, OnDestroy {
   benchId: any;
   bench: Bench;
-  city: any;
+  benchAddress: any;
   data: any;
 
   constructor(
@@ -51,26 +50,20 @@ export class BenchPage implements OnInit, OnDestroy {
         + '&pretty=1'
         + '&no_annotations=1';
 
-      console.log(request_url);
-
-      // see full list of required and optional parameters:
-      // https://opencagedata.com/api#forward
+      // this.http.get(request_url).subscribe(result => {
+      // Cette méthode aurait été plus propre mais "Blocage d’une requête multiorigines (Cross-Origin Request) : la politique « Same Origin » ne permet pas de consulter la ressource distante située sur https://api.opencagedata.com/geocode/v1/json?key=721eb9ce3ae…b672818b4eeb&q=52.37366%2C4.896888&pretty=1&no_annotations=1.  Raison : jeton « authorization » manquant dans l’en-tête CORS « Access-Control-Allow-Headers » du canal de pré-vérification des requêtes CORS."
 
       var request = new XMLHttpRequest();
       request.open('GET', request_url, true);
 
-      request.onload = function () {
+      request.onload = () => {
         // see full list of possible response codes:
         // https://opencagedata.com/api#codes
 
         if (request.status == 200) {
           // Success!
           var data = JSON.parse(request.responseText);
-          alert(data.results[0].formatted);
-          const country = data.results[0].components.country;
-          const city = data.results[0].components.city;
-          const address = data.results[0].components.pedestrian;
-
+          this.benchAddress = data.results[0].formatted
         } else if (request.status <= 500) {
           // We reached our target server, but it returned an error
 
@@ -87,7 +80,7 @@ export class BenchPage implements OnInit, OnDestroy {
       };
 
       request.send();  // make the request
-      
+
     });
 
   }
@@ -95,21 +88,5 @@ export class BenchPage implements OnInit, OnDestroy {
   ngOnDestroy() {
 
   }
-
-  // ngOnInit() {
-  //   this.sub = this.route.params.subscribe(params => {
-  //     this.id = +params['id']; // (+) converts string 'id' to a number
-  //   });
-  //   const benchUrl = `${environment.apiUrl}/benches/${this.id}`
-  //   console.log(benchUrl);
-  //   // this.http.get<BenchPage>(benchesUrl).subscribe(result => {
-  //   //   console.log(`Benches loaded`, result);
-  //   //   this.benches = result.data;
-  //   // });
-  // }
-
-  // ngOnDestroy() {
-  //   this.sub.unsubscribe();
-  // }
 
 }

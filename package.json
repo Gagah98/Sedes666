@@ -44,19 +44,14 @@
     "core-js": "^2.5.4",
     "ionic4-star-rating": "^1.1.1",
     "leaflet": "^1.6.0",
-<<<<<<< HEAD
-    "opencage-api-client": "^0.5.1",
-    "rxjs": "^6.5.4",
-=======
     "rxjs": "^6.5.4",
     "style-loader": "^1.1.2",
->>>>>>> 01a12e73c4bbc42089b3cc3c9c4b27b06efaae0a
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
     "@angular-devkit/architect": "~0.801.2",
-    "@angular-devkit/build-angular": "^0.803.21",
+    "@angular-devkit/build-angular": "^0.803.22",
     "@angular-devkit/core": "~8.1.2",
     "@angular-devkit/schematics": "~8.1.2",
     "@angular/cli": "8.1.3",
