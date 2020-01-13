@@ -10,10 +10,8 @@
 <ion-content>
 
 
-
   <form #addBenchForm="ngForm" (submit)="onSubmit(addBenchForm)">
-    <div style="margin-left: 15px; margin-right: 15px;" class="leaflet-map" leaflet [leafletOptions]="mapOptions"  [(leafletCenter)]="mapOptions.center"  (leafletMapReady)="onMapReady($event)">
-    </div>
+    
   <!-- <img *ngIf="!fileUrl" src="assets/no-image.jpeg"/>
   <img *ngIf="fileUrl" src="{{fileUrl}}"/> -->
     <div *ngIf="pictureData">
