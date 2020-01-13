@@ -62,6 +62,7 @@ export class AuthService {
       map(auth => {
         console.log(`User logged in`, auth);
         this.authSource.next(auth);
+        this.storage.set('user_id', auth.user._id)
         return auth.user;
       })
     );
