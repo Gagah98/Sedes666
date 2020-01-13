@@ -44,6 +44,7 @@
     "core-js": "^2.5.4",
     "ionic4-star-rating": "^1.1.1",
     "leaflet": "^1.6.0",
+    "opencage-api-client": "^0.5.1",
     "rxjs": "^6.5.4",
     "style-loader": "^1.1.2",
     "tslib": "^1.9.0",

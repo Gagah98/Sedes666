@@ -43,6 +43,7 @@ export class MapBenchPage implements OnInit {
     this.geolocation.getCurrentPosition().then((position: Geoposition) => {
       const coords = position.coords;
       console.log(`User is at ${coords.longitude}, ${coords.latitude}`);
+      this.mapOptions.center = latLng(coords.latitude, coords.longitude);
     }).catch(err => {
       console.warn(`Could not retrieve user position because: ${err.message}`);
     });
@@ -50,7 +51,7 @@ export class MapBenchPage implements OnInit {
       next: (position: Geoposition) => {
         const coords = position.coords;
         console.log(`User is at ${coords.longitude}, ${coords.latitude}`);
-        this.mapOptions.center = latLng(coords.latitude, coords.longitude);
+        
       },
       error: err => {
         console.warn(`Could not retrieve user position because: ${err.message}`);
