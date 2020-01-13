@@ -28,7 +28,7 @@
           <ion-item>
               <ion-img [src]="bench.image"></ion-img>
               <ion-icon name="pin" slot="start"></ion-icon>
-              <ion-label>Yverdon-les-bain</ion-label>
+              <ion-label>{{bench.address}}</ion-label>
               <ion-buttons slot="end">
                 <ion-icon (click)="scoreUp(bench.score)" class="score-arrow" name="arrow-up"></ion-icon>
                 <ion-label>{{bench.score}}</ion-label>

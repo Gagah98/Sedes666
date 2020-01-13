@@ -38,7 +38,28 @@ export class HomePage implements OnInit {
   this.http.get<BenchPage>(benchesUrl).subscribe(result => {
     console.log(`Benches loaded`, result);
     this.benches = result.data;
-    
+
+    this.benches.forEach(bench => {
+      var apikey = environment.OCD_API_KEY;
+      var latitude = bench.location.coordinates[0];
+      var longitude = bench.location.coordinates[1];
+
+      var api_url = environment.geocodeApi + '/geocode/v1/json'
+  
+      var request_url = api_url
+        + '?'
+        + 'key=' + apikey
+        + '&q=' + encodeURIComponent(latitude + ',' + longitude)
+        + '&pretty=1'
+        + '&no_annotations=1';
+  
+      this.http.get(request_url).subscribe((result: any) => {
+        bench.address = result.results[0].formatted;
+      });
+    })
+
+
+
   });
 
   }

@@ -13,4 +13,5 @@ export class Bench {
     creationDate:string;
     modifDate:string;
     location:Location;
+    address?:string;
   }
