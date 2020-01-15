@@ -80,7 +80,17 @@
     <ion-label>Appuie-dos</ion-label>
     <ion-toggle checked="true" #backrest="ngModel"  name="backrest"  [(ngModel)]="benchRequest.backrest" slot="start"  color="success" ></ion-toggle>
     </ion-item>
- 
+      <!-- Location button -->
+      <ion-item>
+      <ion-list-header>Utiliser la localisation actuelle</ion-list-header>
+    <ion-toggle checked="true" #location="ngModel"  name="location"  [(ngModel)]="locType" slot="start"  color="success" ></ion-toggle>
+    <ion-list-header *ngIf='locType===true'>{{this.userLocation}}</ion-list-header>
+  </ion-item>
+  <ion-item *ngIf='!locType'>
+    <ion-label  position="floating">Coordonées</ion-label>
+    <ion-input inputmode="text" #location="ngModel" true="true" name="location"  [(ngModel)]="benchRequest.location"></ion-input>
+</ion-item>
+
   <!-- Submit button -->
   <ion-button class="submit-button center" type="submit" expand="block" [disabled]="addBenchForm.invalid">Publish</ion-button>
 

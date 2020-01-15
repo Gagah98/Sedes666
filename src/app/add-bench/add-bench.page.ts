@@ -35,6 +35,8 @@ export class AddBenchPage implements OnInit {
   locations: Location;
   coordinates: Coordinate[];
   user: User;
+  locType : Boolean = true;
+  userLocation : string;
 
   constructor(private geolocation : Geolocation, private imagePicker : ImagePicker, private crop : Crop, private transfer : FileTransfer, private camera : Camera, private pictureService : PictureService, private addBenchService : AddBenchService, private router : Router, private auth : AuthService, private storage : Storage) {
     this.benchRequest = new BenchRequest();
@@ -55,6 +57,7 @@ export class AddBenchPage implements OnInit {
         type: "Point",
         coordinates: [coords.latitude, coords.longitude]
       };
+      this.userLocation= this.locations.coordinates[0].toString()+", "+this.locations.coordinates[1].toString();
     }).catch(err => {
       console.warn(`Could not retrieve user position because: ${err.message}`);
     });
@@ -116,9 +119,7 @@ export class AddBenchPage implements OnInit {
       })
 
     
-
-   
-    this.benchRequest.location = this.locations;
+   //   this.locType = 1 ? this.benchRequest.location = this.locations : this.benchRequest.location = "[1,1]";
 
     this.addBenchService.postBench(this.benchRequest).pipe(first()).subscribe({
       next: () => {
@@ -131,4 +132,9 @@ export class AddBenchPage implements OnInit {
       }
     });
   }
-}
+  changeLocType(){
+    this.locType = !this.locType;
+    console.log(this.locType);
+    }
+  };
+

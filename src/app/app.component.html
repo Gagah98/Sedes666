@@ -5,7 +5,7 @@
       </ion-toolbar>
     </ion-header>
     <ion-content>
-      <ion-list>
+      <ion-list (click)="menu.toggle()">
         <ion-item routerLink="/home">
           <ion-icon name='bed'></ion-icon>
           Benches
