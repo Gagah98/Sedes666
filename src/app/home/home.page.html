@@ -23,7 +23,6 @@
     <ion-list>
     <ion-card *ngFor="let bench of benches" [routerLink]="['/bench', bench._id]">
         <ion-card-header tappable>
-            <ion-img [src]=""></ion-img>
           <ion-card-title>{{bench.description}}</ion-card-title>
           <ion-item>
               <ion-img [src]="bench.image"></ion-img>

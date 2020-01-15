@@ -8,7 +8,7 @@ import { BenchPage } from '../models/benchPage';
 import { AuthService } from '../auth/auth.service';
 import { Observable } from 'rxjs';
 import { AuthGuard } from '../auth/auth.guard';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
@@ -18,7 +18,7 @@ export class ProfilePage implements OnInit {
   userId = this.auth.getUser()["source"]["source"]["_events"]["0"].user._id;
   username = this.auth.getUser()["source"]["source"]["_events"]["0"].user.username;
   benches: Bench[];
-  constructor(private storage: Storage, private auth : AuthService,    public http: HttpClient ) { }
+  constructor(private storage: Storage, private auth : AuthService,    public http: HttpClient,     private router: Router) { }
  
   ngOnInit() {
       const benchesUrl = `${environment.apiUrl}/benches`
@@ -36,6 +36,11 @@ export class ProfilePage implements OnInit {
       console.log(`Benches deleted`, result);
   });
 
+}
+logOut() {
+  console.log("logging out...");
+  this.auth.logOut();
+  this.router.navigateByUrl("/login");
 }
 }
 
