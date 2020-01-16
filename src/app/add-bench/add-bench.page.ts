@@ -50,11 +50,6 @@ export class AddBenchPage implements OnInit {
     this.geolocation.getCurrentPosition().then((position : Geoposition) => {
       const coords = position.coords;
       console.log(`User is at ${coords.longitude}, ${coords.latitude}`);
-      this.mapOptions.center = latLng(coords.latitude, coords.longitude);
-      this.locations = {
-        type: "Point",
-        coordinates: [coords.latitude, coords.longitude]
-      };
     }).catch(err => {
       console.warn(`Could not retrieve user position because: ${err.message}`);
     });
@@ -63,6 +58,10 @@ export class AddBenchPage implements OnInit {
       next: (position : Geoposition) => {
         const coords = position.coords;
         console.log(`User is at ${coords.longitude}, ${coords.latitude}`);
+        return this.locations = {
+          type: "Point",
+          coordinates: [coords.latitude, coords.longitude]
+        };
         
       },
       error: err => {
@@ -118,7 +117,7 @@ export class AddBenchPage implements OnInit {
     
 
    
-    this.benchRequest.location = this.locations;
+    
 
     this.addBenchService.postBench(this.benchRequest).pipe(first()).subscribe({
       next: () => {
