@@ -5,9 +5,6 @@
     </ion-buttons>
     <ion-title>Benches</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="search()">
-        <ion-icon name='search'></ion-icon>
-      </ion-button>
       <ion-button routerLink="/profile">
         <ion-icon name='contact'></ion-icon>
       </ion-button>
@@ -25,13 +22,11 @@
         <ion-card-header tappable>
           <ion-card-title>{{bench.description}}</ion-card-title>
           <ion-item>
-              <ion-img [src]="bench.image"></ion-img>
+              <ion-img style="height : 50%; width:auto" [src]="bench.image"></ion-img>
               <ion-icon name="pin" slot="start"></ion-icon>
               <ion-label>{{bench.address}}</ion-label>
               <ion-buttons slot="end">
-                <ion-icon (click)="scoreUp(bench.score)" class="score-arrow" name="arrow-up"></ion-icon>
                 <ion-label>{{bench.score}}</ion-label>
-                <ion-icon (click)="scoreDown(bench.score)" class="score-arrow" name="arrow-down"></ion-icon>
               </ion-buttons>
             </ion-item>
         </ion-card-header>

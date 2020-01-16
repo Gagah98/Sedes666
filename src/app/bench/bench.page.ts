@@ -3,6 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Bench } from '../models/bench';
+import { VoteRequest } from '../models/vote-request'
+import {User} from "../models/user";
+import {AuthService} from "../auth/auth.service";
 
 @Component({
   selector: 'app-bench',
@@ -10,15 +13,19 @@ import { Bench } from '../models/bench';
   styleUrls: ['./bench.page.scss'],
 })
 
-export class BenchPage implements OnInit, OnDestroy {
+export class BenchPage implements OnInit {
   benchId: any;
   bench: Bench;
   benchAddress: any;
   data: any;
-
+  voteRequest : VoteRequest;
+  user: User;
+  userId = this.auth.getUser()["source"]["source"]["_events"]["0"].user._id;
+  voteType : string;
   constructor(
     private route: ActivatedRoute,
     public http: HttpClient,
+    private auth : AuthService,
   ) {
 
   }
@@ -58,9 +65,24 @@ export class BenchPage implements OnInit, OnDestroy {
     });
 
   }
-
-  ngOnDestroy() {
-
+  scoreUp(){
+    const voteUrl = `/votes`
+    this.voteType = "true";
+    this.voteRequest.type = this.voteType; 
+    this.voteRequest.userId = this.userId;
+    this.voteRequest.benchId = this.benchId;
+    this.http.post(voteUrl,this.voteRequest).subscribe(result => {
+      console.log(`Upvoted`, result);  
+  }
+    )}
+  scoreDown(){
+    const voteUrl = `/votes`
+    this.voteType = "false";
+    this.voteRequest.type = this.voteType; 
+    this.voteRequest.userId = this.userId;
+    this.voteRequest.benchId = this.benchId;
+    this.http.post(voteUrl,this.voteRequest).subscribe(result => {
+      console.log(`Upvoted`, result);  
   }
 
-}
+    )}}
