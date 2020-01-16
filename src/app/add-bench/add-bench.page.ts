@@ -38,8 +38,11 @@ export class AddBenchPage implements OnInit {
   locType : Boolean = true;
   userLocation : string;
 
+  userId = this.auth.getUser()["source"]["source"]["_events"]["0"].user._id;
+
   constructor(private geolocation : Geolocation, private imagePicker : ImagePicker, private crop : Crop, private transfer : FileTransfer, private camera : Camera, private pictureService : PictureService, private addBenchService : AddBenchService, private router : Router, private auth : AuthService, private storage : Storage) {
     this.benchRequest = new BenchRequest();
+   
 
     this.mapOptions = {
       layers: [tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {maxZoom: 19})],
@@ -52,15 +55,12 @@ export class AddBenchPage implements OnInit {
     this.geolocation.getCurrentPosition().then((position : Geoposition) => {
       const coords = position.coords;
       console.log(`User is at ${coords.longitude}, ${coords.latitude}`);
-<<<<<<< HEAD
-=======
       this.mapOptions.center = latLng(coords.latitude, coords.longitude);
       this.locations = {
         type: "Point",
         coordinates: [coords.latitude, coords.longitude]
       };
       this.userLocation= this.locations.coordinates[0].toString()+", "+this.locations.coordinates[1].toString();
->>>>>>> ad762e38269f8b7e0684da38aa61da510768971b
     }).catch(err => {
       console.warn(`Could not retrieve user position because: ${err.message}`);
     });
@@ -121,9 +121,7 @@ export class AddBenchPage implements OnInit {
       ? "../../assets/img/logo-sedes.png"
       : this.picture.url;
    
-      this.storage.get('user_id').then((val) => {
-        this.benchRequest.userId = val
-      })
+      this.benchRequest.userId = this.userId
 
     
    //   this.locType = 1 ? this.benchRequest.location = this.locations : this.benchRequest.location = "[1,1]";
