@@ -22,6 +22,7 @@ export class BenchPage implements OnInit {
   user: User;
   userId = this.auth.getUser()["source"]["source"]["_events"]["0"].user._id;
   voteType : string;
+  voteUrl : string = `${environment.apiUrl}/votes`;
   constructor(
     private route: ActivatedRoute,
     public http: HttpClient,
@@ -66,23 +67,23 @@ export class BenchPage implements OnInit {
 
   }
   scoreUp(){
-    const voteUrl = `/votes`
     this.voteType = "true";
+    this.voteRequest= new VoteRequest()
     this.voteRequest.type = this.voteType; 
     this.voteRequest.userId = this.userId;
     this.voteRequest.benchId = this.benchId;
-    this.http.post(voteUrl,this.voteRequest).subscribe(result => {
+    this.http.post(this.voteUrl,this.voteRequest).subscribe(result => {
       console.log(`Upvoted`, result);  
   }
     )}
   scoreDown(){
-    const voteUrl = `/votes`
     this.voteType = "false";
+    this.voteRequest= new VoteRequest()
     this.voteRequest.type = this.voteType; 
     this.voteRequest.userId = this.userId;
     this.voteRequest.benchId = this.benchId;
-    this.http.post(voteUrl,this.voteRequest).subscribe(result => {
-      console.log(`Upvoted`, result);  
+    this.http.post(this.voteUrl,this.voteRequest).subscribe(result => {
+      console.log(`Downvoted`, result);  
   }
 
     )}}
