@@ -72,6 +72,8 @@ export class AuthService {
   logOut() {
     this.authSource.next(null);
     this.storage.remove('auth');
+    this.storage.remove('user_id');
+    this.storage.remove('username');
     console.log('User logged out');
   }
 

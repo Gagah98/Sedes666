@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { Platform, MenuController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
+import { Storage } from '@ionic/storage';
 
 
 @Component({
@@ -20,6 +21,8 @@ export class AppComponent {
     private statusBar: StatusBar,
     private auth: AuthService,
     private router: Router,
+    private storage: Storage,
+    public readonly menu: MenuController
   ) {
     this.initializeApp();
   }

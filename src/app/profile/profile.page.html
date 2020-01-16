@@ -5,9 +5,6 @@
     </ion-buttons>
     <ion-title>Profile</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="search()">
-        <ion-icon name='search'></ion-icon>
-      </ion-button>
       <ion-button (click)="logOut()">
         <ion-icon name='log-out'></ion-icon>
       </ion-button>
@@ -30,27 +27,20 @@
    <ion-input> {{username}}</ion-input>
   </ion-item>
   <ion-item>
-    <ion-label position="floating">Mot de passe</ion-label>
-    <hr>
-    <h6>*******</h6>
-  </ion-item>
-  <ion-item>
     <h2>Bancs ajoutés</h2>
    </ion-item> 
-  <ion-item *ngFor="let bench of benches">
-    <ion-card> 
-      <ion-img style="height:30rem" [src]="bench.image"></ion-img>
-      <ion-card-header>
-        <ion-card-subtitle>{{bench.location.coordinates[0]}}, {{bench.location.coordinates[1]}}</ion-card-subtitle>
-        <ion-card-title>{{bench.description}}</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-    </ion-card-content>
-    <div align:center>
-    <ion-button (click)="deleteBench(bench._id)" color="warning">Supprimer</ion-button>
-  </div>
-    </ion-card>
-  </ion-item>
-
+   <ion-card *ngFor="let bench of benches" [routerLink]="['/bench', bench._id]">
+    <ion-card-header tappable>
+      <ion-card-title>{{bench.description}}</ion-card-title>
+      <ion-item>
+          <ion-img [src]="bench.image"></ion-img>
+          <ion-icon name="pin" slot="start"></ion-icon>
+          <ion-label>{{bench.address}}</ion-label>
+          <ion-buttons slot="end">
+            <ion-button (click)="deleteBench(bench._id)" color="warning">Supprimer</ion-button>
+          </ion-buttons>
+        </ion-item>
+    </ion-card-header>
+  </ion-card>
 </ion-content>
 
