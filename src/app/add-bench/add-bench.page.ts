@@ -123,6 +123,8 @@ export class AddBenchPage implements OnInit {
    
       this.benchRequest.userId = this.userId
 
+     this.benchRequest.backrest = this.benchRequest.backrest == undefined ? false : this.benchRequest.backrest
+
     
    //   this.locType = 1 ? this.benchRequest.location = this.locations : this.benchRequest.location = "[1,1]";
 

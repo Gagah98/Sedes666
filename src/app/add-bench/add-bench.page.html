@@ -78,7 +78,7 @@
   <ion-list-header>Détails</ion-list-header>
   <ion-item>
     <ion-label>Appuie-dos</ion-label>
-    <ion-toggle checked="true" #backrest="ngModel"  name="backrest"  [(ngModel)]="benchRequest.backrest" slot="start"  color="success" ></ion-toggle>
+    <ion-toggle  checked="false" #backrest="ngModel"  name="backrest"  [(ngModel)]="benchRequest.backrest" slot="start"  color="success" ></ion-toggle>
     </ion-item>
       <!-- Location button -->
       <ion-item>
@@ -88,7 +88,7 @@
   </ion-item>
   <ion-item *ngIf='!locType'>
     <ion-label  position="floating">Coordonées</ion-label>
-    <ion-input inputmode="text" #location="ngModel" true="true" name="location"  [(ngModel)]="benchRequest.location"></ion-input>
+    <ion-input  inputmode="text" #location="ngModel" true="true" name="location"  [(ngModel)]="benchRequest.location"></ion-input>
 </ion-item>
 
   <!-- Submit button -->
