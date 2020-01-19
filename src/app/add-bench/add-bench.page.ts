@@ -36,7 +36,8 @@ export class AddBenchPage implements OnInit {
   coordinates: Coordinate[];
   user: User;
   locType : Boolean = true;
-  userLocation : string;
+  userLatitude : number;
+  userLongitude : number;
 
   userId = this.auth.getUser()["source"]["source"]["_events"]["0"].user._id;
 
@@ -60,7 +61,9 @@ export class AddBenchPage implements OnInit {
         type: "Point",
         coordinates: [coords.latitude, coords.longitude]
       };
-      this.userLocation= this.locations.coordinates[0].toString()+", "+this.locations.coordinates[1].toString();
+      this.userLatitude = this.locations.coordinates[0]
+      this.userLongitude = this.locations.coordinates[1]
+      this.benchRequest.location = this.locations
     }).catch(err => {
       console.warn(`Could not retrieve user position because: ${err.message}`);
     });
@@ -123,8 +126,9 @@ export class AddBenchPage implements OnInit {
    
       this.benchRequest.userId = this.userId
 
+     this.benchRequest.backrest = this.benchRequest.backrest == undefined ? false : this.benchRequest.backrest
+
     
-   //   this.locType = 1 ? this.benchRequest.location = this.locations : this.benchRequest.location = "[1,1]";
 
     this.addBenchService.postBench(this.benchRequest).pipe(first()).subscribe({
       next: () => {
