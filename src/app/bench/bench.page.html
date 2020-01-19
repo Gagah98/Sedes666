@@ -10,35 +10,49 @@
 
 <ion-content>
   <ion-card *ngIf="bench">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="11" style="text-align: start;align-self: center">
     <img src={{bench.image}} />
+    </ion-col>
+    <ion-col size="1" style="text-align: start;align-self: center" >
+      <p>
+    <ion-icon style="font-size: 1.5rem;" (click)="scoreUp();" class="score-arrow" name="arrow-round-up"></ion-icon>
+  </p>
+  <p style="text-align: center;font-size:0.8rem">
+    {{bench.score}}
+  </p>
+  <p>
+    <ion-icon style="font-size: 1.5rem;" (click)="scoreDown()" class="score-arrow" name="arrow-round-down"></ion-icon>
+  </p>
+  </ion-col>
+  </ion-row> 
+  </ion-grid>
     <ion-card-header>
       <ion-card-subtitle>{{this.benchAddress}}</ion-card-subtitle>
-      <ion-card-title>{{bench.description}}</ion-card-title>
+      <ion-card-title>{{bench.description}}  </ion-card-title>
     </ion-card-header>
-    <ion-icon (click)="scoreUp()" class="score-arrow" name="arrow-up"></ion-icon>
-    <ion-label>{{bench.score}}</ion-label>
-    <ion-icon (click)="scoreDown()" class="score-arrow" name="arrow-down"></ion-icon>
     <ion-card-content>
       <ion-grid>
         <ion-row>
-          <ion-col>
+          <ion-col style="text-align: center;">
             <div>Matériel</div>
             <ion-icon size="large" name="cube"></ion-icon>
             <div style="color: #CAD802">{{bench.material}}</div>
           </ion-col>
-          <ion-col>
+          <ion-col style="text-align: center;">
             <div>Confort</div>
             <ion-icon size="large" name="bed"></ion-icon>
             <div style="color: #CAD802">{{bench.ergonomy}}/5</div>
           </ion-col>
         </ion-row>
         <ion-row>
-          <ion-col>
+          <ion-col style="text-align: center;">
             <div>Nombre de places</div>
             <ion-icon size="large" name="people"></ion-icon>
             <div style="color: #CAD802">{{bench.seats}}</div>
           </ion-col>
-          <ion-col>
+          <ion-col style="text-align: center;">
             <div>Appuie-dos</div>
             <ion-icon size="large" name="glasses"></ion-icon><br />
             <div *ngIf='bench.backrest; else elseBlock' style="color: #CAD802">Oui, calé</div>
