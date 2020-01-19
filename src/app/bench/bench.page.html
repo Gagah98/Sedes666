@@ -15,6 +15,9 @@
       <ion-card-subtitle>{{this.benchAddress}}</ion-card-subtitle>
       <ion-card-title>{{bench.description}}</ion-card-title>
     </ion-card-header>
+    <ion-icon (click)="scoreUp()" class="score-arrow" name="arrow-up"></ion-icon>
+    <ion-label>{{bench.score}}</ion-label>
+    <ion-icon (click)="scoreDown()" class="score-arrow" name="arrow-down"></ion-icon>
     <ion-card-content>
       <ion-grid>
         <ion-row>

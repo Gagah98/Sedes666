@@ -35,9 +35,15 @@ export class AddBenchPage implements OnInit {
   locations: Location;
   coordinates: Coordinate[];
   user: User;
+  locType: Boolean = true;
+  userLatitude: number;
+  userLongitude: number;
+
+  userId = this.auth.getUser()["source"]["source"]["_events"]["0"].user._id;
 
   constructor(private geolocation: Geolocation, private imagePicker: ImagePicker, private crop: Crop, private transfer: FileTransfer, private camera: Camera, private pictureService: PictureService, private addBenchService: AddBenchService, private router: Router, private auth: AuthService, private storage: Storage) {
     this.benchRequest = new BenchRequest();
+
 
     this.mapOptions = {
       layers: [tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19 })],
@@ -55,6 +61,9 @@ export class AddBenchPage implements OnInit {
         type: "Point",
         coordinates: [coords.latitude, coords.longitude]
       };
+      this.userLatitude = this.locations.coordinates[0]
+      this.userLongitude = this.locations.coordinates[1]
+      this.benchRequest.location = this.locations
     }).catch(err => {
       console.warn(`Could not retrieve user position because: ${err.message}`);
     });
@@ -63,6 +72,10 @@ export class AddBenchPage implements OnInit {
       next: (position: Geoposition) => {
         const coords = position.coords;
         console.log(`User is at ${coords.longitude}, ${coords.latitude}`);
+        return this.locations = {
+          type: "Point",
+          coordinates: [coords.latitude, coords.longitude]
+        };
 
       },
       error: err => {
@@ -111,25 +124,30 @@ export class AddBenchPage implements OnInit {
       ? "../../assets/img/logo-sedes.png"
       : this.picture.url;
 
-    this.storage.get('user_id').then((val) => {
-      this.benchRequest.userId = val
-    })
+    this.benchRequest.userId = this.userId
+
+    this.benchRequest.backrest = this.benchRequest.backrest == undefined ? false : this.benchRequest.backrest
 
 
-    this.benchRequest.location = this.locations;
 
     console.log(this.benchRequest);
 
 
-      // this.addBenchService.postBench(this.benchRequest).pipe(first()).subscribe({
-      //   next: () => {
-      //     this.router.navigateByUrl("/home");
-      //   },
-      //   error: err => {
-      //     console.log(this.benchRequest);
-      //     this.addBenchError = true;
-      //     console.warn(`The bench couldn't be added ${err.message}`);
-      //   }
-      // });
-    }
+    // this.addBenchService.postBench(this.benchRequest).pipe(first()).subscribe({
+    //   next: () => {
+    //     this.router.navigateByUrl("/home");
+    //   },
+    //   error: err => {
+    //     console.log(this.benchRequest);
+    //     this.addBenchError = true;
+    //     console.warn(`The bench couldn't be added ${err.message}`);
+    //   }
+    // });
   }
+
+changeLocType(){
+  this.locType = !this.locType;
+  console.log(this.locType);
+}
+  };
+
