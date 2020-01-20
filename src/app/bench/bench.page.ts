@@ -6,6 +6,7 @@ import { Bench } from '../models/bench';
 import { VoteRequest } from '../models/vote-request'
 import {User} from "../models/user";
 import {AuthService} from "../auth/auth.service";
+import { WampService } from '../wamp/wamp.service';
 
 @Component({
   selector: 'app-bench',
@@ -23,11 +24,19 @@ export class BenchPage implements OnInit {
   userId = this.auth.getUser()["source"]["source"]["_events"]["0"].user._id;
   voteType : string;
   voteUrl : string = `${environment.apiUrl}/votes`;
+  eventContent: string;
   constructor(
     private route: ActivatedRoute,
     public http: HttpClient,
     private auth : AuthService,
+    private wamp: WampService
   ) {
+
+    this.wamp
+      .listen('com.sedes.updateRanking')
+      .subscribe(event => {
+        console.log("vote added")
+      });
 
   }
 
@@ -65,7 +74,13 @@ export class BenchPage implements OnInit {
 
     });
 
+
   }
+
+  sendEvent() {
+    this.wamp.send('com.sedes.updateRanking', [this.eventContent]);
+  }
+
   scoreUp(){
     this.voteType = "true";
     this.voteRequest= new VoteRequest()
