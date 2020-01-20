@@ -62,4 +62,6 @@
       </ion-grid>
     </ion-card-content>
   </ion-card>
+  <input type="text" name="wamp-msg" id="wamp-msg" [(ngModel)]="eventContent">
+<button (click)="sendEvent()">Send WAMP Event</button>
 </ion-content>
