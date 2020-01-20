@@ -16,21 +16,39 @@
           <!-- Username input -->
           <ion-item class="username-label center">
             <ion-label position="floating">Username</ion-label>
-            <ion-input inputmode="text" #username="ngModel" required="true" name="username"
-              [(ngModel)]="registerRequest.username"></ion-input>
+            <ion-input inputmode="text" #username="ngModel" required="true" minlength="3" maxlength="50" name="username"
+              [(ngModel)]="registerRequest.username" [notIn]="[this.usernames]"></ion-input>
           </ion-item>
+
+          <div *ngIf="username.invalid && (username.dirty || username.touched)">
+            <ion-text class="submit-error center" color='danger' *ngIf="username.errors.minlength">La username doit contenir au moins 3 caractères</ion-text>
+          </div>
       
           <!-- Error message displayed if the username is invalid -->
-          <div class="label-error" lines="none" *ngIf="username.invalid && username.touched">
-            <p color='medium' class="ion-text-center">Username is required.</p>
+          <div class="label-error" lines="none" *ngIf="username.hasError('required') && username.touched">
+            <p color='medium' class="ion-text-center">Le nom d'utilisateur est requis</p>
           </div>
+
+          <div class="label-error" lines="none" *ngIf="username.hasError('notIn') && username.touched">
+            <p color='danger' class="ion-text-center">Ce nom est déjà utilisé</p>
+          </div>
+
+
+
+
+
+          
       
           <!-- Password input -->
           <ion-item class="password-label center">
             <ion-label position="floating">Password</ion-label>
-            <ion-input inputmode="text" #password="ngModel" required="true" type="password" name="password"
+            <ion-input inputmode="text" #password="ngModel" minlength="3" maxlength="50" required="true" type="password" name="password"
               [(ngModel)]="registerRequest.password"></ion-input>
           </ion-item>
+
+          <div *ngIf="password.invalid && (password.dirty || password.touched)">
+            <ion-text class="submit-error center" color='danger' *ngIf="password.errors.minlength">La password doit contenir au moins 3 caractères</ion-text>
+          </div>
       
           <!-- Error message displayed if the password is invalid -->
           <div class="label-error" lines="none" *ngIf="password.invalid && password.touched">
@@ -44,7 +62,7 @@
           <ion-button class="submit-button center" type="submit" expand="block" [disabled]="registerForm.invalid">Join now</ion-button>
       
           <!-- Error message displayed if the register failed -->
-         <ion-text class="submit-error center" color='danger' *ngIf="registerError">Username or password is invalid.</ion-text>
+         <ion-text class="submit-error center" color='danger' *ngIf="registerError">Le username existe déjà</ion-text>
       
       </form>
       <p class="ion-text-center">Already have an account ?</p>

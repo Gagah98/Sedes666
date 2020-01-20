@@ -1,11 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
+import {HttpClient} from "@angular/common/http";
 
 //import { AuthService } from '../auth/auth.service';
 import { RegisterRequest } from '../models/register-request';
 import { RegisterService } from './register.service'
+
+import {User} from "../models/user";
+import {UserPage} from "../models/userPage";
+
+import {environment} from "src/environments/environment";
+
 
 /**
  * register page.
@@ -14,7 +21,7 @@ import { RegisterService } from './register.service'
   templateUrl: 'register.page.html',
   styleUrls: ['register.page.scss']
 })
-export class RegisterPage {
+export class RegisterPage implements OnInit {
 
   /**
    * This authentication request object will be updated when the user
@@ -28,12 +35,35 @@ export class RegisterPage {
    */
   registerError: boolean;
 
+  users: User[];
+  usernames: string[]
+
   constructor(
     private registerService: RegisterService,
-    private router: Router
+    private router: Router,
+    public http : HttpClient
   ) {
     this.registerRequest = new RegisterRequest();
   }
+
+  ngOnInit(){
+    const usersUrl = `${environment.apiUrl}/users`;
+    this.usernames = []
+    this.http.get<UserPage>(usersUrl).subscribe(result => {
+      console.log(`Users loaded`, result);
+      this.users = result.data;
+
+      console.log(this.users)
+
+      for (let user of this.users) {
+
+        this.usernames.push(user.username)
+      }
+
+  })
+
+  console.log(this.usernames)
+}
 
   /**
    * Called when the register form is submitted.

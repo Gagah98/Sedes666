@@ -6,7 +6,9 @@ import { AddBenchPageRoutingModule } from './add-bench-routing.module';
 import { AddBenchPage } from './add-bench.page';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { StarRatingModule } from 'ionic4-star-rating';
-
+import { NotInValidatorDirective } from '../validator/not-in.directive';
+import { MinDirective } from '../validator/min.directive';
+import { MaxDirective } from '../validator/max.directive';
 
 @NgModule({
   imports: [
@@ -17,7 +19,7 @@ import { StarRatingModule } from 'ionic4-star-rating';
     LeafletModule,
     StarRatingModule
   ],
-  declarations: [AddBenchPage]
+  declarations: [AddBenchPage, NotInValidatorDirective, MinDirective, MaxDirective ]
 })
 export class AddBenchPageModule {
   

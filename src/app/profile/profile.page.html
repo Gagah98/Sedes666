@@ -29,13 +29,13 @@
   <ion-item>
     <h2>Bancs ajoutés</h2>
    </ion-item> 
-   <ion-card *ngFor="let bench of benches" [routerLink]="['/bench', bench._id]">
+   <ion-card *ngFor="let bench of benches" >
     <ion-card-header tappable>
       <ion-card-title>{{bench.description}}</ion-card-title>
       <ion-item>
-          <ion-img [src]="bench.image"></ion-img>
+          <ion-img [src]="bench.image" [routerLink]="['/bench', bench._id]"></ion-img>
           <ion-icon name="pin" slot="start"></ion-icon>
-          <ion-label>{{bench.address}}</ion-label>
+          <ion-label [routerLink]="['/bench', bench._id]">{{bench.address}}</ion-label>
           <ion-buttons slot="end">
             <ion-button (click)="deleteBench(bench._id)" color="warning">Supprimer</ion-button>
           </ion-buttons>

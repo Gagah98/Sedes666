@@ -30,17 +30,25 @@
     </div>
   <ion-item>
     <ion-label position="floating">Description</ion-label>
-    <ion-input inputmode="text" #description="ngModel" required="true" name="description"  [(ngModel)]="benchRequest.description"></ion-input>
+    <ion-input inputmode="text" maxlength="50" minlength="3" #description="ngModel" required="true" name="description"  [(ngModel)]="benchRequest.description"></ion-input>
+    
+    <div *ngIf="description.invalid && (description.dirty || description.touched)">
+    <ion-text class="submit-error center" color='danger' *ngIf="description.errors.minlength">La description doit contenir au moins 3 caractères</ion-text>
+  </div>
   </ion-item>
   <ion-item>
-    <ion-label position="floating">Nombre de places max</ion-label>
-    <ion-input inputmode="text" #seats="ngModel" required="true" name="seats"  [(ngModel)]="benchRequest.seats"></ion-input>
+    <ion-label position="floating">Nombre de places max </ion-label>
+    <ion-input  type="number" #seats="ngModel" required="true" name="seats" [min]="1" [max]="3000" required [(ngModel)]="benchRequest.seats"></ion-input>    
+    <div *ngIf="seats.invalid && (seats.dirty || seats.touched)">
+    <ion-text class="submit-error center" color='danger' *ngIf="seats.hasError('min')">Un banc doit au moins avoir une place</ion-text>
+       <ion-text class="submit-error center" color='danger' *ngIf="seats.hasError('max')">Un banc ne peut pas contenir plus de 3000 places</ion-text> 
+</div>
   </ion-item>
   <ion-list-header>Materiels</ion-list-header>
   <ion-item>
     <ion-item>
       <ion-label>Materiel</ion-label>
-      <ion-select okText="Valider" cancelText="Annuler" #material="ngModel" name="material"  [(ngModel)]="benchRequest.material">
+      <ion-select okText="Valider" required cancelText="Annuler" #material="ngModel" name="material"  [(ngModel)]="benchRequest.material">
         <ion-select-option selected value="Wood">Bois</ion-select-option>
         <ion-select-option value="Metal">Metal</ion-select-option>
         <ion-select-option value="Stone">Pierre</ion-select-option>
@@ -71,7 +79,7 @@
 
   <ion-list-header>Ergonomie</ion-list-header>
   <ion-item>
-    <ionic4-star-rating  activeIcon="md-star" defaultIcon="md-star-outline" activeColor="#CAD802"
+    <ionic4-star-rating  required activeIcon="md-star" defaultIcon="md-star-outline" activeColor="#CAD802"
       defaultColor="#CAD802" readonly="false" rating="0" fontSize="32px" #ergonomy="ngModel"  name="ergonomy"  [(ngModel)]="benchRequest.ergonomy">
     </ionic4-star-rating>
   </ion-item>
@@ -84,15 +92,22 @@
       <ion-item>
       <ion-list-header>Utiliser la localisation actuelle</ion-list-header>
     <ion-toggle checked="true" #location="ngModel"  name="location"  [(ngModel)]="locType" slot="start"  color="success" ></ion-toggle>
-    <ion-list-header *ngIf='locType===true'>{{this.userLongitude}}</ion-list-header>
-    <ion-list-header *ngIf='locType===true'>{{this.userLatitude}}</ion-list-header>
+    <ion-list-header *ngIf='locType===true'>Latitude : {{this.userLatitude}}</ion-list-header>
+    <ion-list-header *ngIf='locType===true'>Longitude : {{this.userLongitude}}</ion-list-header>
   </ion-item>
   <ion-item *ngIf='!locType'>
     <ion-label  position="floating">Latitude</ion-label>
-    <ion-input  inputmode="text" #latitude="ngModel" true="true" name="latitude"  [(ngModel)]="benchRequest.location.coordinates[0]"></ion-input>
+    <ion-input  inputmode="text" #latitude="ngModel" true="true" name="latitude"  [min]="-90" [max]="90" [(ngModel)]="benchRequest.location.coordinates[0]"></ion-input>
     <ion-label  position="floating">Longitude</ion-label>
-    <ion-input  inputmode="text" #longitude="ngModel" true="true" name="longitude"  [(ngModel)]="benchRequest.location.coordinates[1]"></ion-input>
-</ion-item>
+    <ion-input  inputmode="text" #longitude="ngModel" true="true" name="longitude"  [min]="-180" [max]="180" [(ngModel)]="benchRequest.location.coordinates[1]"></ion-input>
+    <div *ngIf="latitude.invalid && (latitude.dirty || latitude.touched)">
+      <ion-text class="submit-error center" color='danger' *ngIf="latitude.hasError('min') || latitude.hasError('max')">La latitude doit être entre -90 et 90 </ion-text>
+    </div>
+    
+    <div *ngIf="longitude.invalid && (longitude.dirty || longitude.touched)">
+      <ion-text class="submit-error center" color='danger' *ngIf="longitude.hasError('min') || longitude.hasError('max')">La longitude doit être entre -180 et 180</ion-text>
+    </div>
+  </ion-item>
 
   <!-- Submit button -->
   <ion-button class="submit-button center" type="submit" expand="block" [disabled]="addBenchForm.invalid">Publish</ion-button>
@@ -100,7 +115,8 @@
   
       
   <!-- Error message displayed if the register failed -->
- <ion-text class="submit-error center" color='danger' *ngIf="addBenchError">Username or password is invalid.</ion-text>
+ <ion-text class="submit-error center" color='danger' *ngIf="addBenchError">Bench is invalid</ion-text>
+
 
 </form>
 
