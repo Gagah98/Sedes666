@@ -1,5 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {NgForm} from "@angular/forms";
+import {NgForm, FormControl, ValidatorFn, Validators} from "@angular/forms";
 import {Geolocation, Geoposition} from "@ionic-native/geolocation/ngx";
 import {latLng, MapOptions, tileLayer, Map} from "leaflet";
 import {Crop} from "@ionic-native/crop/ngx";
@@ -18,6 +18,8 @@ import {AuthService} from "../auth/auth.service";
 import {Coordinate} from "../models/coordinate";
 import {Location} from "../models/location";
 import {User} from "../models/user";
+
+
 
 @Component({selector: "app-add-bench", templateUrl: "./add-bench.page.html", styleUrls: ["./add-bench.page.scss"]})
 export class AddBenchPage implements OnInit {
@@ -38,6 +40,10 @@ export class AddBenchPage implements OnInit {
   locType : Boolean = true;
   userLatitude : number;
   userLongitude : number;
+
+
+
+
 
   userId = this.auth.getUser()["source"]["source"]["_events"]["0"].user._id;
 
@@ -118,6 +124,10 @@ export class AddBenchPage implements OnInit {
       return;
     }
 
+    const control = new FormControl(9, Validators.min(10));
+   
+
+
     this.addBenchError = false;
 
     this.benchRequest.image = !this.picture
@@ -141,6 +151,7 @@ export class AddBenchPage implements OnInit {
       }
     });
   }
+
   changeLocType(){
     this.locType = !this.locType;
     console.log(this.locType);
