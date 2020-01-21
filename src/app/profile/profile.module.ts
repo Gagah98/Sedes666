@@ -8,7 +8,7 @@ import { ProfilePageRoutingModule } from './profile-routing.module';
 
 import { ProfilePage } from './profile.page';
 
-import { NotInValidatorDirective } from '../validator/not-in.directive';
+
 
 @NgModule({
   imports: [
@@ -17,6 +17,6 @@ import { NotInValidatorDirective } from '../validator/not-in.directive';
     IonicModule,
     ProfilePageRoutingModule
   ],
-  declarations: [ProfilePage, NotInValidatorDirective]
+  declarations: [ProfilePage]
 })
 export class ProfilePageModule {}

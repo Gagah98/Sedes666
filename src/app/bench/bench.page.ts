@@ -24,7 +24,7 @@ export class BenchPage implements OnInit {
   userId = this.auth.getUser()["source"]["source"]["_events"]["0"].user._id;
   voteType : string;
   voteUrl : string = `${environment.apiUrl}/votes`;
-  eventContent: string;
+  eventContent: number;
   constructor(
     private route: ActivatedRoute,
     public http: HttpClient,
@@ -35,7 +35,7 @@ export class BenchPage implements OnInit {
     this.wamp
       .listen('com.sedes.updateRanking')
       .subscribe(event => {
-        console.log("vote added")
+        console.log(event)
       });
 
   }
@@ -78,7 +78,7 @@ export class BenchPage implements OnInit {
   }
 
   sendEvent() {
-    this.wamp.send('com.sedes.updateRanking', [this.eventContent]);
+    this.wamp.send('com.sedes.updateRanking', [this.bench.score+1]);
   }
 
   scoreUp(){
