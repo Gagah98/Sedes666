@@ -35,6 +35,7 @@ export class BenchPage implements OnInit {
     this.wamp
       .listen('com.sedes.updateRanking')
       .subscribe(event => {
+        console.log("vote added")
         console.log(event)
       });
 
