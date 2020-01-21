@@ -22,6 +22,16 @@
 </style>
 <ion-content>
   <ion-list>
+    <ion-item>
+      <ion-label>Matériel</ion-label>
+      <ion-select interface="popover" [(ngModel)]="material" (ionChange)="filter(material)" cancel-text="Annuler">
+          <ion-select-option value="Wood">Bois</ion-select-option>
+          <ion-select-option value="Metal">Metal</ion-select-option>
+          <ion-select-option value="Stone">Pierre</ion-select-option>
+          <ion-select-option value="Plastic">Plastique</ion-select-option>
+          <ion-select-option value="Marble">Marbre</ion-select-option>
+      </ion-select>
+    </ion-item>
     <ion-card *ngFor="let bench of benches">
       <ion-card-header tappable [routerLink]="['/bench', bench._id]">
         <ion-card-title>{{bench.description}}</ion-card-title>

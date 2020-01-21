@@ -22,6 +22,7 @@ export class HomePage implements OnInit {
 
   benches: Bench[];
   count: number;
+  material: string;
 
   constructor(private auth: AuthService, private router: Router, public http: HttpClient) { }
 
@@ -78,26 +79,46 @@ export class HomePage implements OnInit {
         var loadedBenches = result.data;
         if (loadedBenches.length != 0) {
           console.log(`More benches loaded`, loadedBenches);
-          loadedBenches.forEach(bench => {
-            this.benches.push(bench);
-          })
+          if (this.material) {
+            loadedBenches.forEach(bench => {
+              if (bench.material == this.material) {
+                this.benches.push(bench);
+              }
+            })
+          } else {
+            loadedBenches.forEach(bench => {
+              this.benches.push(bench);
+            })
+          }
         } else {
           this.toggleInfiniteScroll();
         }
       });
       console.log('Done');
       event.target.complete();
-
-      // App logic to determine if all data is loaded
-      // and disable the infinite scroll
-      if (this.count == 20) {
-        event.target.disabled = true;
-      }
     }, 500);
   }
 
+
   toggleInfiniteScroll() {
     this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
+  }
+
+  filter(material) {
+    this.material = material;
+    console.log(material);
+    this.benches = [];
+    const benchesUrl = `${environment.apiUrl}/benches`;
+    this.http.get<BenchPage>(benchesUrl).subscribe(result => {
+      var loadedBenches = result.data;
+      console.log(`Benches filtered`, loadedBenches);
+      loadedBenches.forEach(bench => {
+        if (bench.material == material) {
+          this.benches.push(bench);
+        }
+      })
+    });
+    console.log("ok c filtré");
   }
 
   logOut() {
