@@ -1,5 +1,5 @@
 # SEDES
-Sedes is a multi-platform app developped with [Ionic](https://github.com/ionic-team/ionic) based on [Angular](https://github.com/angular/angular) front-end framework. Basée sur [l'api sedes666](https://github.com/evandu65/sedes666)
+Sedes is a multi-platform app developped with [Ionic](https://github.com/ionic-team/ionic) based on [Angular](https://github.com/angular/angular) front-end framework. Using [sedes666 API](https://github.com/evandu65/sedes666)
 ## Installation
 – Git
 ```bash
