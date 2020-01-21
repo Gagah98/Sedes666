@@ -17,9 +17,6 @@
 
 
 <ion-content>
-  <ion-button (click)="toggleInfiniteScroll()" expand="block">
-    Toggle Infinite Scroll
-  </ion-button>
   <ion-list id="list">
     <ion-card *ngFor="let bench of benches" [routerLink]="['/bench', bench._id]">
       <ion-card-header tappable>

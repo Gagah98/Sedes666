@@ -72,34 +72,38 @@ export class HomePage implements OnInit {
   loadData(event) {
     this.count++;
     console.log(this.count);
-      setTimeout(() => {
-        const benchesUrl = `${environment.apiUrl}/benches?page=${this.count}`
-        this.http.get<BenchPage>(benchesUrl).subscribe(result => {
-          console.log(`More benches loaded`, result);
-          var loadedBenches = result.data;
+    setTimeout(() => {
+      const benchesUrl = `${environment.apiUrl}/benches?page=${this.count}`
+      this.http.get<BenchPage>(benchesUrl).subscribe(result => {
+        var loadedBenches = result.data;
+        if (loadedBenches.length != 0) {
+          console.log(`More benches loaded`, loadedBenches);
           loadedBenches.forEach(bench => {
             this.benches.push(bench);
           })
-        });
-        console.log('Done');
-        event.target.complete();
-
-        // App logic to determine if all data is loaded
-        // and disable the infinite scroll
-        if (this.count == 20) {
-          event.target.disabled = true;
+        } else {
+          this.toggleInfiniteScroll();
         }
-      }, 500);
-    }
+      });
+      console.log('Done');
+      event.target.complete();
+
+      // App logic to determine if all data is loaded
+      // and disable the infinite scroll
+      if (this.count == 20) {
+        event.target.disabled = true;
+      }
+    }, 500);
+  }
 
   toggleInfiniteScroll() {
-        this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
-      }
+    this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
+  }
 
   logOut() {
-        console.log("logging out...");
-        this.auth.logOut();
-        this.router.navigateByUrl("/login");
-      }
+    console.log("logging out...");
+    this.auth.logOut();
+    this.router.navigateByUrl("/login");
+  }
 
 }
