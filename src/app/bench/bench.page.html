@@ -17,7 +17,7 @@
     </ion-col>
     <ion-col size="1" style="text-align: start;align-self: center" >
       <p>
-    <ion-icon style="font-size: 1.5rem;" (click)="scoreUp();" class="score-arrow" name="arrow-round-up"></ion-icon>
+    <ion-icon style="font-size: 1.5rem;" (click)="scoreUp();" (click)="sendEvent()" [(ngModel)]="bench.score" class="score-arrow" name="arrow-round-up"></ion-icon>
   </p>
   <p style="text-align: center;font-size:0.8rem">
     {{bench.score}}
@@ -62,6 +62,6 @@
       </ion-grid>
     </ion-card-content>
   </ion-card>
-  <input type="text" name="wamp-msg" id="wamp-msg" [(ngModel)]="eventContent">
-<button (click)="sendEvent()">Send WAMP Event</button>
+ <!--  <input type="text" name="wamp-msg" id="wamp-msg" [(ngModel)]="eventContent">
+<button (click)="sendEvent()">Send WAMP Event</button> -->
 </ion-content>

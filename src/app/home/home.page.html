@@ -21,52 +21,59 @@
   }
 </style>
 <ion-content>
-    <ion-list>
-    <ion-card *ngFor="let bench of benches" >
-        <ion-card-header tappable [routerLink]="['/bench', bench._id]">
-          <ion-card-title>{{bench.description}}</ion-card-title>
-          <ion-img [src]="bench.image" ></ion-img>   
-        </ion-card-header>
-        <ion-card-content>
-              
-            <ion-grid>
-            <ion-row >
-              <ion-col style="text-align: center;"> 
-                <p>
-              <ion-icon name="pin"></ion-icon>
-            </p>
-              <p>
-             <ion-label *ngIf="(bench.address);else latlong"> {{bench.address}}</ion-label>
-              <ng-template style="font-size: 2rem;text-align: end;" #latlong >
-                <p>
-                  {{bench.location.coordinates[0]}}
-                </p> 
-                <p>{{bench.location.coordinates[1]}}</p></ng-template>    
-            </p>
-            </ion-col>  
-              <ion-col style="text-align: center;">
-                <p>
-                  Score
-                </p>
-                <p>
-                  {{bench.score}}
-                </p>      
-              </ion-col>
-              <ion-col style="text-align: center;">
-                <p><ion-icon name="star"></ion-icon></p>
-                <p style="white-space: pre">
-                   {{bench.ergonomy}}
-                </p> 
-              </ion-col >
-              </ion-row>
-            </ion-grid>     
-          </ion-card-content>
-      </ion-card>
-    </ion-list>
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-        <ion-fab-button routerLink="/add-bench">
-          <ion-icon name="add"></ion-icon>
-        </ion-fab-button>
-      </ion-fab>
+  <ion-list>
+    <ion-card *ngFor="let bench of benches">
+      <ion-card-header tappable [routerLink]="['/bench', bench._id]">
+        <ion-card-title>{{bench.description}}</ion-card-title>
+        <ion-img [src]="bench.image"></ion-img>
+      </ion-card-header>
+      <ion-card-content>
 
+        <ion-grid>
+          <ion-row>
+            <ion-col style="text-align: center;">
+              <p>
+                <ion-icon name="pin"></ion-icon>
+              </p>
+              <p>
+                <ion-label *ngIf="(bench.address);else latlong"> {{bench.address}}</ion-label>
+                <ng-template style="font-size: 2rem;text-align: end;" #latlong>
+                  <p>
+                    {{bench.location.coordinates[0]}}
+                  </p>
+                  <p>{{bench.location.coordinates[1]}}</p>
+                </ng-template>
+              </p>
+            </ion-col>
+            <ion-col style="text-align: center;">
+              <p>
+                Score
+              </p>
+              <p>
+                {{bench.score}}
+              </p>
+            </ion-col>
+
+            <ion-col style="text-align: center;">
+              <p>
+                <ion-icon name="star"></ion-icon>
+              </p>
+              <p style="white-space: pre">
+                {{bench.ergonomy}}
+              </p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    ​ <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+      ​ </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="/add-bench">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
