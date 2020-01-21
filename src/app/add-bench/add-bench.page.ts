@@ -37,9 +37,9 @@ export class AddBenchPage implements OnInit {
   locations: Location;
   coordinates: Coordinate[];
   user: User;
-  locType : Boolean = true;
-  userLatitude : number;
-  userLongitude : number;
+  locType: Boolean = true;
+  userLatitude: number;
+  userLongitude: number;
 
 
 
@@ -47,19 +47,19 @@ export class AddBenchPage implements OnInit {
 
   userId = this.auth.getUser()["source"]["source"]["_events"]["0"].user._id;
 
-  constructor(private geolocation : Geolocation, private imagePicker : ImagePicker, private crop : Crop, private transfer : FileTransfer, private camera : Camera, private pictureService : PictureService, private addBenchService : AddBenchService, private router : Router, private auth : AuthService, private storage : Storage) {
+  constructor(private geolocation: Geolocation, private imagePicker: ImagePicker, private crop: Crop, private transfer: FileTransfer, private camera: Camera, private pictureService: PictureService, private addBenchService: AddBenchService, private router: Router, private auth: AuthService, private storage: Storage) {
     this.benchRequest = new BenchRequest();
-   
+
 
     this.mapOptions = {
-      layers: [tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {maxZoom: 19})],
+      layers: [tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19 })],
       zoom: 13,
       center: latLng(46.778186, 6.641524)
     };
   }
 
   ngOnInit() {
-    this.geolocation.getCurrentPosition().then((position : Geoposition) => {
+    this.geolocation.getCurrentPosition().then((position: Geoposition) => {
       const coords = position.coords;
       console.log(`User is at ${coords.longitude}, ${coords.latitude}`);
       this.mapOptions.center = latLng(coords.latitude, coords.longitude);
@@ -75,14 +75,14 @@ export class AddBenchPage implements OnInit {
     });
 
     const trackingSubscription = this.geolocation.watchPosition().subscribe({
-      next: (position : Geoposition) => {
+      next: (position: Geoposition) => {
         const coords = position.coords;
         console.log(`User is at ${coords.longitude}, ${coords.latitude}`);
         return this.locations = {
           type: "Point",
           coordinates: [coords.latitude, coords.longitude]
         };
-        
+
       },
       error: err => {
         console.warn(`Could not retrieve user position because: ${err.message}`);
@@ -90,19 +90,19 @@ export class AddBenchPage implements OnInit {
     });
   }
 
-  onMapReady(map : Map) {
+  onMapReady(map: Map) {
     setTimeout(() => map.invalidateSize(), 0);
 
     // wrap map.locate in a function
     function locate() {
-      map.locate({setView: true, maxZoom: 19});
+      map.locate({ setView: true, maxZoom: 19 });
     }
 
     // call locate every 3 seconds... forever
     setInterval(locate, 3000);
   }
 
-  selected() {}
+  selected() { }
 
   logRatingChange(rating) {
     console.log("changed rating: ", rating);
@@ -117,7 +117,7 @@ export class AddBenchPage implements OnInit {
     });
   }
 
-  onSubmit(form : NgForm) {
+  onSubmit(form: NgForm) {
     event.preventDefault();
     // Do not do anything if the form is invalid.
     if (form.invalid) {
@@ -133,23 +133,26 @@ export class AddBenchPage implements OnInit {
     this.benchRequest.image = !this.picture
       ? "../../assets/img/logo-sedes.png"
       : this.picture.url;
-   
-      this.benchRequest.userId = this.userId
 
-     this.benchRequest.backrest = this.benchRequest.backrest == undefined ? false : this.benchRequest.backrest
+    this.benchRequest.userId = this.userId
 
-    
+    this.benchRequest.backrest = this.benchRequest.backrest == undefined ? false : this.benchRequest.backrest
 
-    this.addBenchService.postBench(this.benchRequest).pipe(first()).subscribe({
-      next: () => {
-        this.router.navigateByUrl("/home");
-      },
-      error: err => {
-        console.log(this.benchRequest);
-        this.addBenchError = true;
-        console.warn(`The bench couldn't be added ${err.message}`);
-      }
-    });
+
+
+    console.log(this.benchRequest);
+
+
+    // this.addBenchService.postBench(this.benchRequest).pipe(first()).subscribe({
+    //   next: () => {
+    //     this.router.navigateByUrl("/home");
+    //   },
+    //   error: err => {
+    //     console.log(this.benchRequest);
+    //     this.addBenchError = true;
+    //     console.warn(`The bench couldn't be added ${err.message}`);
+    //   }
+    // });
   }
 
   changeLocType(){
