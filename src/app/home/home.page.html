@@ -14,35 +14,59 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-
-
+<style>
+  :root {
+    --ion-safe-area-top: 20px;
+    --ion-safe-area-bottom: 22px;
+  }
+</style>
 <ion-content>
-  <ion-list id="list">
-    <ion-card *ngFor="let bench of benches" [routerLink]="['/bench', bench._id]">
-      <ion-card-header tappable>
-        <ion-img [src]=""></ion-img>
-        <ion-card-title>{{bench.description}}</ion-card-title>
-        <ion-item>
-          <ion-img [src]="bench.image"></ion-img>
-          <ion-icon name="pin" slot="start"></ion-icon>
-          <ion-label>{{bench.address}}</ion-label>
-          <ion-buttons slot="end">
-            <ion-icon (click)="scoreUp(bench.score)" class="score-arrow" name="arrow-up"></ion-icon>
-            <ion-label>{{bench.score}}</ion-label>
-            <ion-icon (click)="scoreDown(bench.score)" class="score-arrow" name="arrow-down"></ion-icon>
-          </ion-buttons>
-        </ion-item>
-      </ion-card-header>
-    </ion-card>
-  </ion-list>
-  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
-    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
-    </ion-infinite-scroll-content>
-  </ion-infinite-scroll>
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button routerLink="/add-bench">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+    <ion-list>
+    <ion-card *ngFor="let bench of benches" >
+        <ion-card-header tappable [routerLink]="['/bench', bench._id]">
+          <ion-card-title>{{bench.description}}</ion-card-title>
+          <ion-img [src]="bench.image" ></ion-img>   
+        </ion-card-header>
+        <ion-card-content>
+              
+            <ion-grid>
+            <ion-row >
+              <ion-col style="text-align: center;"> 
+                <p>
+              <ion-icon name="pin"></ion-icon>
+            </p>
+              <p>
+             <ion-label *ngIf="(bench.address);else latlong"> {{bench.address}}</ion-label>
+              <ng-template style="font-size: 2rem;text-align: end;" #latlong >
+                <p>
+                  {{bench.location.coordinates[0]}}
+                </p> 
+                <p>{{bench.location.coordinates[1]}}</p></ng-template>    
+            </p>
+            </ion-col>  
+              <ion-col style="text-align: center;">
+                <p>
+                  Score
+                </p>
+                <p>
+                  {{bench.score}}
+                </p>      
+              </ion-col>
+              <ion-col style="text-align: center;">
+                <p><ion-icon name="star"></ion-icon></p>
+                <p style="white-space: pre">
+                   {{bench.ergonomy}}
+                </p> 
+              </ion-col >
+              </ion-row>
+            </ion-grid>     
+          </ion-card-content>
+      </ion-card>
+    </ion-list>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button routerLink="/add-bench">
+          <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
 
 </ion-content>
