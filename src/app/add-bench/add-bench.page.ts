@@ -143,16 +143,16 @@ export class AddBenchPage implements OnInit {
     console.log(this.benchRequest);
 
 
-    // this.addBenchService.postBench(this.benchRequest).pipe(first()).subscribe({
-    //   next: () => {
-    //     this.router.navigateByUrl("/home");
-    //   },
-    //   error: err => {
-    //     console.log(this.benchRequest);
-    //     this.addBenchError = true;
-    //     console.warn(`The bench couldn't be added ${err.message}`);
-    //   }
-    // });
+     this.addBenchService.postBench(this.benchRequest).pipe(first()).subscribe({
+       next: () => {
+         this.router.navigateByUrl("/home");
+       },
+       error: err => {
+         console.log(this.benchRequest);
+        this.addBenchError = true;
+         console.warn(`The bench couldn't be added ${err.message}`);
+       }
+     });
   }
 
   changeLocType(){

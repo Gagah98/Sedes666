@@ -78,7 +78,7 @@ export class BenchPage implements OnInit {
   }
 
   sendEvent() {
-    this.wamp.send('com.sedes.updateRanking', [this.bench.score+1]);
+    this.wamp.send('com.sedes.updateRanking', [this.bench.score]);
   }
 
   scoreUp(){
