@@ -28,7 +28,7 @@ export class WampService {
       return new Observable((subscriber : Observer<any>) => {
         // Subscribe to the topic and make the observable emit a value
         // each time a new event is published to this topic
-        session.subscribe(topicUri, (eventArgs, eventKwargs) => subscriber.next(eventArgs));
+        session.subscribe(topicUri, (eventArgs, eventKwargs) => subscriber.next(eventKwargs));
       });
     }));
   }
