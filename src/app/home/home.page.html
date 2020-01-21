@@ -36,8 +36,8 @@
                 <ion-icon name="pin"></ion-icon>
               </p>
               <p>
-                <ion-label *ngIf="(bench.address);else latlong"> {{bench.address}}</ion-label>
-                <ng-template style="font-size: 2rem;text-align: end;" #latlong>
+                <ion-label *ngIf="(bench.address);else latlong" style="font-size: 0.6rem;"> {{bench.address}}</ion-label>
+                <ng-template style="font-size: 0.2rem;text-align: end;" #latlong>
                   <p>
                     {{bench.location.coordinates[0]}}
                   </p>
@@ -47,7 +47,7 @@
             </ion-col>
             <ion-col style="text-align: center;">
               <p>
-                Score
+                <ion-icon class="score-arrow" name="arrow-round-up"></ion-icon>
               </p>
               <p>
                 {{bench.score}}

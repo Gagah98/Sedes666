@@ -16,14 +16,9 @@
     <img src={{bench.image}} />
     </ion-col>
     <ion-col size="1" style="text-align: start;align-self: center" >
-      <p>
+  <p style="text-align: center;font-size:1rem">
     <ion-icon style="font-size: 1.5rem;" (click)="scoreUp();" (click)="sendEvent()" [(ngModel)]="bench.score" class="score-arrow" name="arrow-round-up"></ion-icon>
-  </p>
-  <p style="text-align: center;font-size:0.8rem">
     {{bench.score}}
-  </p>
-  <p>
-    <ion-icon style="font-size: 1.5rem;" (click)="scoreDown()" class="score-arrow" name="arrow-round-down"></ion-icon>
   </p>
   </ion-col>
   </ion-row> 
