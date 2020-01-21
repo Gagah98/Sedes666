@@ -1,18 +1,25 @@
 # SEDES
 Sedes est une application qui répertorie les bancs à travers le monde
 ## Installation
-Git
+###Git
 ```bash
 git clone https://github.com/Gagah98/Sedes666.git
 ```
 ```bash
 cd Sedes666
 ```
-Dependencies
+###Dependencies
 ```bash
 npm install
 ```
-Run the app
+###Environment
+```bash
+cd src/environments/
+```
+```bash
+cp environment.sample.ts environment.ts 
+```
+###Run the app
 ```bash
 ionic serve
 ```
