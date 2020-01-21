@@ -1,4 +1,4 @@
-![logo](https://github.com/Gagah98/Sedes666/blob/master/src/assets/img/logo-sedes.svg)
+![logo](https://github.com/Gagah98/Sedes666/blob/master/src/assets/logo-sedes.svg)
 
 # SEDES
 Sedes is a multi-platform app developped with [Ionic](https://github.com/ionic-team/ionic) based on [Angular](https://github.com/angular/angular) front-end framework. Using [sedes666 API](https://github.com/evandu65/sedes666)
