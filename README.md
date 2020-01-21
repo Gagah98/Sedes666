@@ -15,7 +15,7 @@ npm init
 ```bash
 npm install
 ```
-To run the app
+Run the app
 ```bash
 ionic serve
 ```
