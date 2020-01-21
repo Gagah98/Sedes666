@@ -10,9 +10,6 @@ cd Sedes666
 ```
 Dependencies
 ```bash
-npm init
-```
-```bash
 npm install
 ```
 Run the app
